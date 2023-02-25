@@ -4403,7 +4403,7 @@ def yskysn():
         printman('''
 ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\no               Q       YSKYSN HP: '''+' '*(4-len(str(bhp)))+str(bhp)+'''                        o\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo''')
         j=saying[bhp//(100*bmulti)]
-        print('\n'+j[0]+' '*((62-len(j[1]))//2)+j[1]+r+(' (no)' if bhp//(100*bmulti)==9 else ''))
+        print('\n'+j[0]+' '*((62-len(j[1]))//2)+"\u0332".join(j[1])+r+(' (no)' if bhp//(100*bmulti)==9 else ''))
         print("\n\t  [Left/Right to select, enter to choose, n for stats]")
         if hasspidy:
           print('\t\t\t\t\t\t   \033[38;5;1m[Spidy]'+r)
@@ -8310,7 +8310,7 @@ try:
   achievements['SEEN_UPDATE']
 except:
   achievements['SEEN_UPDATE']=True
-  print('Kinda important:')
+  print("\u0332".join('Kinda important:'))
   print("To view update logs, press 'u'\nTo get a small overview of the game press 'o'\n\033[38;5;9m\nYou need to press it in the start menu\033[0m\n(Start menu is after this)\n\n(wait 6 seconds, this appears until you get your first achievement)")
   time.sleep(6)
   clearline(2)
