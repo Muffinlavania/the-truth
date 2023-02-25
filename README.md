@@ -29,5 +29,6 @@ Screenshots from the game:
 ![image](https://user-images.githubusercontent.com/93288617/221372797-a8a89a5b-8b2c-4838-90af-41261f9549c0.png)
 
 
-
+## Can you find the truth?
+![image](https://user-images.githubusercontent.com/93288617/221373135-e510a29b-e841-4a3b-9eb2-1f62136ae665.png)
 
