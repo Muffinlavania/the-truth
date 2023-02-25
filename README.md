@@ -21,7 +21,10 @@ To set up the exe from the source code you will need:
 - run `pyinstaller -F Truth_for_Windows.py/Truth_for_Mac.py`
 
 Screenshots from the game:
+
 ![image](https://user-images.githubusercontent.com/93288617/221372251-66f4fa82-1453-4361-9f32-89a4d3c5c90c.png) ![image](https://user-images.githubusercontent.com/93288617/221372265-7713e076-4fdb-48ba-803b-974c85897f46.png) ![image](https://user-images.githubusercontent.com/93288617/221372310-d5366a0d-4675-4c8a-a352-f6f647013b5e.png) ![image](https://user-images.githubusercontent.com/93288617/221372339-6ef899ea-b3ed-4dd5-8881-401fbb664143.png) ![image](https://user-images.githubusercontent.com/93288617/221372369-7328c5c5-74c9-48bf-8a6c-9044c5e7c60e.png) ![image](https://user-images.githubusercontent.com/93288617/221372425-41d16eb9-ba6f-47b0-af98-b1b332089ddc.png)
+
+
 (*K*eep *Y*ourself *S*afe boss)
 ![image](https://user-images.githubusercontent.com/93288617/221372797-a8a89a5b-8b2c-4838-90af-41261f9549c0.png)
 
