@@ -1,26 +1,34 @@
-#windows version
 import os,time,sys,random,json
-import msvcrt
 from threading import Thread
-devz = ['Muffinlavania','Lucas','Cristian'] #if you want to play as a dev, look no further than naming yourself these..
+devz = ['Muffinlavania','LUCASLI4','Lucas','Cristian','Mr. Petroleum'] #if you want to play as a dev, look no further than naming yourself these..
 
-UP='up'
-DOWN='down'
-RIGHT='right'
-LEFT='left'
-BACKSPACE='backspace'
-ENTER='enter'
-TAB='tab'
+#DIFFERENCES BETWEEN VERSIONS, all other stuff the same
+WINDOWS = os.name=='nt'
+if WINDOWS:
+  import msvcrt
 
-achievements={ "Horrible Game":False, "Bang":False, "Live on":False, "Rip bozo":False, "Escape?":False, "Raft":False,"The Lab":False,"The Plane":False, "What's this?":False, "Escape.":False, "Sped":False, "Poggers":False, "Pro fix":False, "Big lure":False, "ok":False, "classic":False, "afk":False, "???":False, "New game pog":False, "lanc":False, "mini":0,'end':0,'easter_cooldown':[1,69420]}
-somekeys = {'H': 'up', 'P': 'down', 'K': 'left', 'M': 'right', '\\r': 'enter', '\\x08': 'backspace','\\xe0':'yippe yay','\\t':'tab'}
+  #WALRUS OPERATOR OP 
+  somekeys = {'H': 'up', 'P': 'down', 'K': 'left', 'M': 'right', '\\r': 'enter', '\\x08': 'backspace','\\xe0':'yippe yay','\\t':'tab'}
+else:
+  from getkey import keys
+  from getkey import getkey as GETkey
 def getkey():
-  return (h if (h:=str(msvcrt.getch())[2:-1]) not in somekeys.keys() or h in ['P','H','K','M'] else somekeys[h] if h!='\\xe0' else somekeys[str(msvcrt.getch())[2:-1]])
-#WALRUS OPERATOR OP 
-def c():
-  os.system('clear' if os.name!='nt' else 'cls')
-print('\033[?25l') #hide cursor
+  return (h if (h:=str(msvcrt.getch())[2:-1]) not in somekeys.keys() or h in ['P','H','K','M'] else somekeys[h] if h!='\\xe0' else somekeys[str(msvcrt.getch())[2:-1]]).lower() if WINDOWS else GETkey.lower()
+UP='up' if WINDOWS else keys.UP
+DOWN='down' if WINDOWS else keys.DOWN
+RIGHT='right' if WINDOWS else keys.RIGHT
+LEFT='left' if WINDOWS else keys.LEFT
+BACKSPACE='backspace' if WINDOWS else keys.BACKSPACE
+ENTER='enter' if WINDOWS else keys.ENTER
+TAB='tab' if WINDOWS else keys.TAB
 
+def underline(thio):
+  return thio if WINDOWS else "\u0332".join(thio)
+def c(ti=0):
+  print(reset);os.system('clear' if os.name!='nt' else 'cls');time.sleep(ti)
+
+print('\033[?25l') #hide cursor
+gGg=True
 L=1
 bold,reset='\033[01m','\033[0m'
 for i in os.listdir():
@@ -43,6 +51,9 @@ except:
   with open('truthdata.json','w') as j:
     j.write(json.dumps(achievements))
 
+def Sprint(text): #for printing special characters, should work?
+  sys.stdout.buffer.write(text.encode('utf-8'))
+  sys.stdout.flush()
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
 #----------------------                                 ----------------------------
@@ -3528,7 +3539,7 @@ def achieve(h='`',h1=True):
       onions
   except:
     f=False
-  if h!='`':
+  if h!='`' and gGg:
     if not f or h in ['end','easter_cooldown']:
       achievements[h]=h1
       if h1==True and h not in ['end','easter_cooldown']:
@@ -5730,7 +5741,7 @@ def theeasterdoor():#easter
   slepy(1)
   theealist=[]
   while True:
-    print(doorcode)
+    Sprint(doorcode)
     print(bold+'\n\nEnter code: ')
     for i in theealist:
       print(i,end=' ')
@@ -7240,10 +7251,7 @@ def printout(i9,Se=False,hue=False): #eastervar1,eastervar2
     elif i9=='e' and mazeq in theeasters:#easter
       pass
     elif i9=='⍨': #easter
-      if not emazehappy:
-        print(i9,end='')
-      else:
-        print('ت',end='')
+      print(i9 if not emazehappy else 'ت',end='')
     elif i9=='8':
       print('\033[48;5;216m '+reset,end='')
     elif i9=='▸':
@@ -7258,7 +7266,7 @@ def printout(i9,Se=False,hue=False): #eastervar1,eastervar2
         ieas=easterdict1[eastervar1]
       else:
         ieas=' '
-      print('\033[48;5;146m'+ieas+reset,end='')
+      Sprint('\033[48;5;146m'+ieas+reset)
     elif i9=='○':
       print('\033[48;5;82m '+reset,end="")
     elif i9 in items and i9 not in ['A','B','C','D','E'] and i9 not in notes:
