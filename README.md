@@ -14,8 +14,9 @@ Has:
 
 This is mainly so I remember it exists, the code and exes for both windows and linux/mac/other stuff are in here
 
+# To play on mac (or windows if you want to complie yourself)
 To set up the exe from the source code you will need:
-- Python/pip (pip3 for mac/linux/whatever)
+- [Python/pip](https://www.python.org/downloads/) (pip3 for mac/linux/whatever)
 - run `pip/pip3 install pyinstaller` in your console
 - (make sure you are in the current path as the source code before next step, probably downloads)
 - run `pyinstaller -F Truth_for_Windows.py/Truth_for_Mac.py`
