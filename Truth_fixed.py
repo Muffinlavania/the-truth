@@ -30,27 +30,58 @@ def c(ti=0):
 print('\033[?25l') #hide cursor
 gGg=True
 L=1
-bold,reset='\033[01m','\033[0m'
-for i in os.listdir():
-  if i=='truthdata.json':
-    L=0
-if L==1:
-  print('What is your name? (THIS IS WHAT YOU WILL FOREVER BE CALLED, CHOOSE WISELY!)\n')
+bold,reset,R='\033[01m','\033[0m','\033[0m'
+
+if 'truthdata.json' not in os.listdir():
+  print('What is your name? (THIS IS WHAT YOU WILL FOREVER BE CALLED, best not be xXballs_gamer69Xx!)\n')
   time.sleep(1)
   name=input(">").strip().title()
   input(f"Hello {name}!\n[Enter to continue]")
-else:
-  input(f"Save data detected!\nIf you think this is a mistake, delete truthdata.json in this folder.\n(This folder is {os.getcwd()})\n\n[Enter to continue]")
-c()
-try:
-  with open('truthdata.json','r') as j:
-    achievements=json.load(j)
-  name=achievements['name']
-except:
-  achievements['name']=name
   with open('truthdata.json','w') as j:
-    j.write(json.dumps(achievements))
+    j.write(json.dumps({name:achievements}))
+else:
+  with open('truthdata.json','r') as j:
+    achievements_temp=json.load(j)
+  if "Horrible Game" in achievements_temp.keys() and type(achievements_temp["Horrible Game"])==bool: #first time in new update
+    achievements_temp={achievements_temp.pop('name'):achievements_temp}
+  names=list(achievements_temp.keys())
+  def col(o):
+    for ind,g in enumerate(o): yield f"{ind+1}) {g}\n" #YIELD IS COOL
+  #do while but scuffed
+  nameZ="".join([i for i in col(names)])
+  j = input(f"\033[38;5;222mSave data detected!\033[0m\nIf you think this is a mistake, delete truthdata.json in this folder.\n(This folder is {os.getcwd()})\n\n\033[38;5;222mOtherwise, who are you?\033[0m (n for new user)\n"+nameZ+"\n\n>\033[38;5;222m ")
+  while (int(j) if j.isdigit() else j) not in range(1,len(names)+1) and j!='n':
+    c()
+    j = input(f"\033[38;5;124mInvalid input!\n\n\033[38;5;222mWho are you?\033[0m (n for new user)\n"+nameZ+"\n\n>\033[38;5;222m ")
+  c()
+  if j=='n':
+    while j not in names:
+      j = input(f"Welcome new person! You are a person right?\n\nWhat would you like to be called? \n\033[38;5;52m[must not be in \033[0m{nameZ.replace(os.linesep,',')[:-1]}\033[38;5;52m]\033[0m\n\n>\033[38;5;222m ") #pov os.linesep instead of \n lol
+    c()
+    name=j
+    #printt but smaller
+    for i in f"Welcome to this world {j}!":
+      sys.stdout.write(i)
+      sys.stdout.flush()
+      time.sleep(.05)
+    time.sleep(2)
+    input(R+"\n[Any key to continue to the game]")
+  else:
+    name = names[int(j)-1]
+c()
 
+#initial writing (and making sure we arent overwriting anything else)
+with open('truthdata.json','r') as wead:
+  achievements2=json.load(wead)
+if "Horrible Game" in achievements2.keys() and type(achievements2["Horrible Game"])==bool: #first time in new update
+  achievements2={name:achievements2}
+else:
+  if name in achievements2.keys():
+    achievements=achievements2[name]
+  else:
+    achievements2[name]=achievements
+with open('truthdata.json','w') as j:
+  j.write(json.dumps(achievements2))
 def Sprint(text): #for printing special characters, should work?
   sys.stdout.buffer.write(text.encode('utf-8'))
   sys.stdout.flush()
@@ -3531,22 +3562,24 @@ try:
 except:
   succe=False
 gettingkey=False
+
 def achieve(h='`',h1=True):
-  global achievements,name
+  global achievements
   f=achievements[h] if h in achievements.keys() else False
   if h!='`' and gGg:
     if not f or h in ['end','easter_cooldown']:
       achievements[h]=h1
       if h1==True and h not in ['end','easter_cooldown']:
         print(R+'[You got \033[38;5;86m'+h+R+'!]')
-  with open("truthdata.json",'r') as k: #make sure you dont override things
+  with open("truthdata.json",'r') as k: #make sure you dont override things, with yourself AND others
      achievements2=json.load(k)
-  for i in achievements2.keys():
-    if achievements2[i] in [False,True]:
-      achievements[i]=True if achievements2[i] else achievements[i]
+  for i in achievements2[name].keys():
+    if achievements2[name][i] in [False,True]:
+      achievements[i]=True if achievements2[name][i] else achievements[i]
+  achievements2[name]=achievements
   with open('truthdata.json','w') as j:
-    j.write(json.dumps(achievements)) 
-    
+    j.write(json.dumps(achievements2)) 
+
 def getkey1():
   global timeSTUP,tiit,afk,gettingkey,keyz
   gettingkey,afk=True,True
