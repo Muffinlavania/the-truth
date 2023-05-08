@@ -9,7 +9,7 @@ Has:
 - Not a single use of pygame even though this would probably be sick in it
 - A kinda huge map, with darkness and stuff
 - NPCS, Items, interactables like the powerplant etc.
-- An easter event (yes i added events, theres dfinitely not reminants of other ones in there...)
+- An easter event (yes i added events, theres definitely not reminants of other ones in there...)
 - Bosses...
 
 This is mainly so I remember it exists, the code and exes for both windows and linux/mac/other stuff are in here
