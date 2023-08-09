@@ -12,14 +12,19 @@ Has:
 - An easter event (yes i added events, theres definitely not reminants of other ones in there...)
 - Bosses...
 
-This is mainly so I remember it exists, the code and exes for both windows and linux/mac/other stuff are in here
+This is mainly so I remember it exists, the code for Windows/Mac/Other stuff is here, as well as the already made exe for windows (idk how to make it for other OS)
 
-# To play on mac (or windows if you want to complie yourself)
-To set up the exe from the source code you will need:
+# To play on mac (or windows if you want to compile yourself)
+## If you want music (highly recommended): 
+- download [this folder of songs](https://drive.google.com/drive/folders/1bpNWlxozLGk5Ks6vH8DcmFtmvU1f9MPO) (MAKE SURE ITS THE FOLDER, Truth)
+- put this folder in the same path as the next step,
+  
+## To set up the exe from the source code you will need:
 - [Python/pip](https://www.python.org/downloads/) (pip3 for mac/linux/whatever)
 - run `pip/pip3 install pyinstaller` in your console
 - (make sure you are in the current path as the source code before next step, probably downloads)
-- run `pyinstaller -F Truth_for_Windows.py/Truth_for_Mac.py`
+- **if you do have the music**: run `pyinstaller -F --add-data "Truth/*.wav;Truth/" --add-data "Truth/*.mp3;Truth/" -i TRUTH.ico TheTruth.py`
+- **if you do not have the music**: run `pyinstaller -F TheTruth.py`
 
 Screenshots from the game:
 
