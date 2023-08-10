@@ -23,7 +23,7 @@ This is mainly so I remember it exists, the code for Windows/Mac/Other stuff is 
 - [Python/pip](https://www.python.org/downloads/) (pip3 for mac/linux/whatever)
 - run `pip/pip3 install pyinstaller` in your console
 - (make sure you are in the current path as the source code before next step, probably downloads)
-- **if you do have the music**: run `pyinstaller -F --add-data "Truth/*.wav;Truth/" --add-data "Truth/*.mp3;Truth/" -i TRUTH.ico TheTruth.py`
+- **if you do have the music**: run `pyinstaller -F --add-data "Truth/*.wav;Truth/" --add-data "Truth/*.mp3;Truth/" TheTruth.py`
 - **if you do not have the music**: run `pyinstaller -F TheTruth.py`
 
 Screenshots from the game:
