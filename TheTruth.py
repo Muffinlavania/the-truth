@@ -1,12 +1,11 @@
 import os,time as TY,sys,random,json,wave
 from pygame import mixer
-from threading import Thread
+from threading import Thread,current_thread
 
 
 #minimap(prob) work, maybe add a little ui too?
-#maybe add Module D skip count
-#Module B cant be picked up from the right side in the truth
-#Night Vision works in cavem1 and cavem2, its dark in the shed at night even when powered
+
+
 istime=True
 #so time.sleep also stops time lol
 class time:
@@ -86,7 +85,7 @@ SOME TODO:
 - after beating game and relogging, you are greeting with an impatient start screen, water glitching, and you need to get A, but when about to get it, you get a warning from D about stuff
 - Every step closer you take to Module A makes D tell you more and more warnings, at one point the entire maze gets light and you can see theres walls in front of A by D (need to get B to pass)
 - after getting A, EVERYTHING becomes the same exact color, and the only thing you can do is try to exit the cave, the right transitions wont work, youll be taken to nothing 
-- equipping Mod A will result in nothing, when you go outside time goes x10 fold or something and its guaranteed death, with a special message and special achievement
+- 
 
 
 '''
@@ -187,8 +186,7 @@ def Sprint(text): #for printing special characters, should work?
 tinyvars={'chest':True,'MYARMS':False,'firstmin':False,'othermin':False,'min3':False,'shrine1':0,'shrine2':0,'shrine3':0,'present1':0,'umev':0,'minydict':{'ˇ':"maze1",'∛':"maze2",'∜':"maze3",'♣':"maze4",'♦':"maze5",'♥':"maze6",'♠':"maze7",'☺':"maze8",'☻':"maze9",'♀':"maze10"}} #going to be for one time use variables, such as the variable for if you opened miner chest find small, find tinyvars, find smallvars, find small dict
 
 def smallvarget(nam):
-  global tinyvars
-  return tinyvars.get(nam,False)
+  return tinyvars.get(name,False)
 def smallvarchange(nam,value=True):
   global tinyvars
   tinyvars[nam] = value
@@ -1463,7 +1461,7 @@ Mining3=list('''
 ###----#;#;-----#####-----;####;#;-----;####----###
 ###---------------------------------------------###
 ###---------------------------------------------###
-###----;##;-----#####;----#;####;#-----;##;#----###
+###----;##;-----#####;#####;####;#-----;##;#----###
 ###----#;#;-----;#;#T#UUUU#T##;###-----#;#;;----###
 ################;#####UUUU#########;###############
 ###################################################
@@ -1723,7 +1721,7 @@ theTruth=list("""
 @@╦╦╦╦╦╦╦---------------------------------╦╦╦╦╦╦╦╦╦
 @@@╦╦╦╦╦╦╦-------------------------------╦╦╦╦╦╦╦╦╦╦
 @@@@╦╦╦╦╦╦╦╦╦╦-----------------------╦╦╦╦╦╦@@@@╦╦╦╦
-@@@╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦!!!╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦@@@@@@╦╦╦
+@@@╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦!!╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦@@@@@@╦╦╦
 """)
 theLake=list('''
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2023,7 +2021,7 @@ Boss10=list("""
 ast='\033[0m\033[0m\033[0m\033[0m' #for stalling purposes lol
 #The Truth ending, only true true gamers make it here
 #x,x,x,4,5,6,7,8,9,10,11,12,13,14 
-dialogue1_1="Y'know ever since I got out of that capsule this corner has intrigued me."+ast+'\nSuch detail. Nothing like what you see in that thing.' #find dias
+dialogue1_1="Y'know ever since I got out of that capsule this corner has intrigued me."+ast+'\nSuch detail. Nothing like what you see in that thing.'
 dialogue1_2='I mean sure its a corner but its a cool one alright.'+ast+'\nAnyway I don\' know what to do so let me be.'+R+"\n(She returns to staring at the wall...)"
 dialogue2_1='Yo what the hell this looks just like the lab.'+ast+'\nCmon man, I was litterally picking up Module B when you let us all out.'+ast+"\nSame wall color, but it's weirdly.... real, I guess."+ast+'\nEven the blue of the capsule, its just so real and like look...'+R+'\n(You decide to leave before he keeps speaking...)'
 dialogue2_2='(Hes still muttering something.)'+ast+"\n(Something about Module D and a key.)"
@@ -2039,10 +2037,6 @@ dkey1='\033[38;5;21mno shot your like so cool god damn\033[38;5;21m\033[38;5;21m
 dkey2='\033[38;5;21mlike bro i got all the achievements\033[38;5;21m\033[38;5;21m\nsince day 1 everythings been so easy bro i got em all\033[38;5;21m\033[38;5;21m\nbut god damn you just did like the coolest thing\033[38;5;21m\033[38;5;21m\nngl i kinda liked that place tho i even got my own achievement lol'+R
 dpor1='hihihih '+name+" is a cool name being honest"+ast+'\nim pretty sure thats the way out, but like...'+ast+'\n(She stops speaking)'
 dpor2='(She looks at you, then back at the opening)'
-dialogue3_1_1 = f"yk i really thought that this whole real life thing would actually be cool bro\ni was so mad at that stupid plane it actually sucks\nHOW DOES THIS GAME THINK I CAN JUST FLY IT!{ast}\nbut anyway i get kicked out of the game cause of you thanks btw\nbut then i wake up and its just the same thing without the water and like more techy things{ast}\nlike i swear to god if theres aggressive stuff outside like in the game."
-dialogue3_1_2 = "wait what is outside? you been out there yet\nthis is outside right?\nwait what is real\nIS THIS ALL STILL A SIMULATION AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-dialogue3_2_1 = "I'm pretty sure you're the one who set us free right? Thank you!\nI have to say though, that game was FUCKING DOGSHIT HOLY SHIT LOL\nEVERYTIME I TRIED TO DO THAT BOSS FIGHT I WOULD GET THAT IMPOSSIBLE ATTACK AND JUST BE LEFT AT 1 HP LIKE WTF YOU WANT ME TO DO BRO??????\nABSOLUTE SHIT DEVELOPER DUDE WHAT A BITCH"
-dialogue3_2_2 = "wait actually\nwho is the developer?\nwhy has no one thought of this who tf put us in there\nwho are the scientists man i read all the lore on those note scrap thingies it was cool and all but still\nwho was actually behind all this????\nthey must be hiding behind a handle or something, theres a few secrets that mention something like 'the muffin man'\ni dont know what a muffin is, but im guessing its not a good thing\nor maybe it could be something like a very tasty pastry that british people abuse the word of, i dont know."
 t1_1='This is dirt right?'+ast+' At least thats what I heard...'+ast+'\nIma be real kinda looking like The Shed walls.'+ast+'\nAnd that blue stuff... literally the exact same as The Lake.'+ast+'\nSimilarities everywhere I guess.'
 t1_2='The sky too... everything but the silence reminds me of the ocean.'+ast+'\nAnd the grass, kinda looks like Module E, and the....'+ast+'\n(You can tell that he\'s been in the capsule a little too long)'
 t31_1='Look at how big they are...'+ast+"\nI used to know so much about these things... at least I think."+ast+"\nNow, I don't even know the name of them."
@@ -2054,7 +2048,7 @@ l2_2='(Hes moving?'+ast+' If so, very very slowly)'
 tolook4={
   'TheOne1':['⊡⋄⎔⎚','▀▁▂▃'],
   'TheOne2':['█▉▊▋','⊞⊟⊠░'],
-  'TheOne3':['⊡⋄⎔⎚',"▀▁▂▃"],
+  'TheOne3':[],
   'TheOne4':['⊞⊟⊠░'],
   'TheOne5':['▄▅▆▇'],
   'TheOne6':['⊡⋄⎔⎚'],
@@ -2068,8 +2062,8 @@ tolook4={
 #FIX DIALOGUE THING
 
 thedictionwords={
-  '⊡⋄⎔⎚':{'theone1':0,'theone3':0,'theone6':0,"TheOne3":[dialogue3_1_1,dialogue3_1_2],'TheOne1':[dialogue1_1,dialogue1_2],'TheOne6':[dialogue6_1,dialogue6_2]},
-  '▀▁▂▃':{'theone1':0,'theone3':0,'keyroom':0,"TheOne3":[dialogue3_2_1,dialogue3_2_2],'TheOne1':[dialogue2_1,dialogue2_2],'KeyRoom':[dkey1,dkey2]},
+  '⊡⋄⎔⎚':{'theone1':0,'theone6':0,'TheOne1':[dialogue1_1,dialogue1_2],'TheOne6':[dialogue6_1,dialogue6_2]},
+  '▀▁▂▃':{'theone1':0,'keyroom':0,'TheOne1':[dialogue2_1,dialogue2_2],'KeyRoom':[dkey1,dkey2]},
  '█▉▊▋':{'theone2':0,'true1':0,'true4':0,'TheOne2':[dialogue3_1,dialogue3_2],'True1':[t1_1,t1_2],"True4":[l1_1,l1_2]},
   '⊞⊟⊠░':{'theone2':0,'theone4':0,'TheOne2':[dialogue4_1,dialogue4_2],'TheOne4':[dpor1,dpor2]},
   '▄▅▆▇':{'true3':0,'true4':0,'theone5':0,'True3':[t31_1,t31_2],"True4":[l2_1,l2_2],'TheOne5':[dialogue5_1,dialogue5_2]},
@@ -2394,9 +2388,9 @@ playinref='''
 playinref=list(playinref)
 #Yes im hiding these variables down here so no one can see the stupidly long lists lol (Dont show this to anyone know whos how to make a list or else they will die of cringe)
 
-#this looks like ["1:00",'1:01','1:02',...............,"12:59"] (idk why i didnt start at 12 or like 6 lol)
-timez = [f"{i}:{i2:0>{2}}" for i in range(1,13) for i2 in range(0,60)]
+#I dunno i guess i was tired to do a for loop or something
 
+timez=["1:00","1:01","1:02","1:03","1:04","1:05","1:06","1:07","1:08","1:09","1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19","1:20","1:21","1:22","1:23","1:24","1:25","1:26","1:27","1:28","1:29","1:30","1:31","1:32","1:33","1:34","1:35","1:36","1:37","1:38","1:39","1:40","1:41","1:42","1:43","1:44","1:45","1:46","1:47","1:48","1:49","1:50","1:51","1:52","1:53","1:54","1:55","1:56","1:57","1:58","1:59","2:00","2:01","2:02","2:03","2:04","2:05","2:06","2:07","2:08","2:09","2:10","2:11","2:12","2:13","2:14","2:15","2:16","2:17","2:18","2:19","2:20","2:21","2:22","2:23","2:24","2:25","2:26","2:27","2:28","2:29","2:30","2:31","2:32","2:33","2:34","2:35","2:36","2:37","2:38","2:39","2:40","2:41","2:42","2:43","2:44","2:45","2:46","2:47","2:48","2:49","2:50","2:51","2:52","2:53","2:54","2:55","2:56","2:57","2:58","2:59","3:00","3:01","3:02","3:03","3:04","3:05","3:06","3:07","3:08","3:09","3:10","3:11","3:12","3:13","3:14","3:15","3:16","3:17","3:18","3:19","3:20","3:21","3:22","3:23","3:24","3:25","3:26","3:27","3:28","3:29","3:30","3:31","3:32","3:33","3:34","3:35","3:36","3:37","3:38","3:39","3:40","3:41","3:42","3:43","3:44","3:45","3:46","3:47","3:48","3:49","3:50","3:51","3:52","3:53","3:54","3:55","3:56","3:57","3:58","3:59","4:00","4:01","4:02","4:03","4:04","4:05","4:06","4:07","4:08","4:09","4:10","4:11","4:12","4:13","4:14","4:15","4:16","4:17","4:18","4:19","4:20","4:21","4:22","4:23","4:24","4:25","4:26","4:27","4:28","4:29","4:30","4:31","4:32","4:33","4:34","4:35","4:36","4:37","4:38","4:39","4:40","4:41","4:42","4:43","4:44","4:45","4:46","4:47","4:48","4:49","4:50","4:51","4:52","4:53","4:54","4:55","4:56","4:57","4:58","4:59","5:00","5:01","5:02","5:03","5:04","5:05","5:06","5:07","5:08","5:09","5:10","5:11","5:12","5:13","5:14","5:15","5:16","5:17","5:18","5:19","5:20","5:21","5:22","5:23","5:24","5:25","5:26","5:27","5:28","5:29","5:30","5:31","5:32","5:33","5:34","5:35","5:36","5:37","5:38","5:39","5:40","5:41","5:42","5:43","5:44","5:45","5:46","5:47","5:48","5:49","5:50","5:51","5:52","5:53","5:54","5:55","5:56","5:57","5:58","5:59","6:00","6:01","6:02","6:03","6:04","6:05","6:06","6:07","6:08","6:09","6:10","6:11","6:12","6:13","6:14","6:15","6:16","6:17","6:18","6:19","6:20","6:21","6:22","6:23","6:24","6:25","6:26","6:27","6:28","6:29","6:30","6:31","6:32","6:33","6:34","6:35","6:36","6:37","6:38","6:39","6:40","6:41","6:42","6:43","6:44","6:45","6:46","6:47","6:48","6:49","6:50","6:51","6:52","6:53","6:54","6:55","6:56","6:57","6:58","6:59","7:00","7:01","7:02","7:03","7:04","7:05","7:06","7:07","7:08","7:09","7:10","7:11","7:12","7:13","7:14","7:15","7:16","7:17","7:18","7:19","7:20","7:21","7:22","7:23","7:24","7:25","7:26","7:27","7:28","7:29","7:30","7:31","7:32","7:33","7:34","7:35","7:36","7:37","7:38","7:39","7:40","7:41","7:42","7:43","7:44","7:45","7:46","7:47","7:48","7:49","7:50","7:51","7:52","7:53","7:54","7:55","7:56","7:57","7:58","7:59","8:00","8:01","8:02","8:03","8:04","8:05","8:06","8:07","8:08","8:09","8:10","8:11","8:12","8:13","8:14","8:15","8:16","8:17","8:18","8:19","8:20","8:21","8:22","8:23","8:24","8:25","8:26","8:27","8:28","8:29","8:30","8:31","8:32","8:33","8:34","8:35","8:36","8:37","8:38","8:39","8:40","8:41","8:42","8:43","8:44","8:45","8:46","8:47","8:48","8:49","8:50","8:51","8:52","8:53","8:54","8:55","8:56","8:57","8:58","8:59","9:00","9:01","9:02","9:03","9:04","9:05","9:06","9:07","9:08","9:09","9:10","9:11","9:12","9:13","9:14","9:15","9:16","9:17","9:18","9:19","9:20","9:21","9:22","9:23","9:24","9:25","9:26","9:27","9:28","9:29","9:30","9:31","9:32","9:33","9:34","9:35","9:36","9:37","9:38","9:39","9:40","9:41","9:42","9:43","9:44","9:45","9:46","9:47","9:48","9:49","9:50","9:51","9:52","9:53","9:54","9:55","9:56","9:57","9:58","9:59","10:00","10:01","10:02","10:03","10:04","10:05","10:06","10:07","10:08","10:09","10:10","10:11","10:12","10:13","10:14","10:15","10:16","10:17","10:18","10:19","10:20","10:21","10:22","10:23","10:24","10:25","10:26","10:27","10:28","10:29","10:30","10:31","10:32","10:33","10:34","10:35","10:36","10:37","10:38","10:39","10:40","10:41","10:42","10:43","10:44","10:45","10:46","10:47","10:48","10:49","10:50","10:51","10:52","10:53","10:54","10:55","10:56","10:57","10:58","10:59","11:00","11:01","11:02","11:03","11:04","11:05","11:06","11:07","11:08","11:09","11:10","11:11","11:12","11:13","11:14","11:15","11:16","11:17","11:18","11:19","11:20","11:21","11:22","11:23","11:24","11:25","11:26","11:27","11:28","11:29","11:30","11:31","11:32","11:33","11:34","11:35","11:36","11:37","11:38","11:39","11:40","11:41","11:42","11:43","11:44","11:45","11:46","11:47","11:48","11:49","11:50","11:51","11:52","11:53","11:54","11:55","11:56","11:57","11:58","11:59","12:00","12:01","12:02","12:03","12:04","12:05","12:06","12:07","12:08","12:09","12:10","12:11","12:12","12:13","12:14","12:15","12:16","12:17","12:18","12:19","12:20","12:21","12:22","12:23","12:24","12:25","12:26","12:27","12:28","12:29","12:30","12:31","12:32","12:33","12:34","12:35","12:36","12:37","12:38","12:39","12:40","12:41","12:42","12:43","12:44","12:45","12:46","12:47","12:48","12:49","12:50","12:51","12:52","12:53","12:54","12:55","12:56","12:57","12:58","12:59"]
 miniA=[
 213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,
 265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,
@@ -2493,11 +2487,11 @@ achieve5='''
 |---\033[48;5;74m \033[0m----------------------------------------\033[48;5;82m \033[0m---|
 └────────────────────────────────────────────────┘
 '''
-achieve5true=f'''
+achieve5true='''
 ┌────────────────────────────────────────────────┐
-|                 \033[38;5;18mThe True Truth\033[0m                 |
+|                                                |
 |                      Done.                     |
-|{"You, "+name+" are them.":^48}|
+|                                                |
 |\033[48;5;196m                                                \033[0m|
 |\033[48;5;208m                                                \033[0m|
 |\033[48;5;126m       And they say this game is hard :)        \033[0m|
@@ -2744,7 +2738,7 @@ keyz=''
 #what you can do, printt(string,delay time/enter at end?/slepy time at end,enter at end?/slepy time at end)
 def printt(thingggg,dela=.03,iiu=True,SANS=False):
   global keyz2,istime
-  keyz2,indeci,unsp='',dela in decis,"Unspoken Relic" in inventory
+  keyz2=''
   j = istime
   istime=False
   if type(thingggg)!=str: #FOR LISTS ONLY, NEEDS EQUAL LENGTHS FOR THING AND DELA UNPACKING GO BRRRRRR
@@ -2757,14 +2751,14 @@ def printt(thingggg,dela=.03,iiu=True,SANS=False):
     if keyz2!='x':
       if SANS and ind%2==0 and i!=' ':
         sound("Truth/sans.wav")
-      time.sleep(dela if indeci else .04 if unsp else .02)
+      time.sleep(dela if dela in decis else .02)
   if dela!=False and iiu!=False: #i get lazy lol
     print("")
-  if dela>=.5 or type(iiu)!=bool: #thank you binary for existing
+  if dela>.5 or type(iiu)!=bool: #thank you binary for existing
     slepy(dela if type(iiu)==bool else iiu) #you can put in the waiting time for each char or at the end for dela
   keyz2=''
   istime=j
-def printt2(thing1,thing2,thecenter,dela=.04): #huge thing literally just for monke text (i want to practice lol)
+def printt2(thing1,thing2,thecenter,dela=.04): #huge thing literally just for monke text (i want to pracitce lol)
   global keyz2,istime
   keyz2=''
   j = istime
@@ -2837,7 +2831,11 @@ def slepy(amonu):
 
 mR,minicolor,inventory='\033[48;5;254m','\033[48;5;254m',[] #find inventory
 def set_inv():
-  return list(set(inventory))
+  BUMBA = []
+  for i in inventory:
+    if i not in BUMBA:
+      BUMBA.append(i)
+  return BUMBA
 def setall(li):
 	global mazeq
 	for i in li:
@@ -2873,9 +2871,11 @@ def clearline(rheffds=1):
   for i in range(rheffds):
     sys.stdout.write('\x1b[1A\x1b[2K')
   sys.stdout.flush()
+r=0
 listoqs=[387,388,389,390,391,392,393,438,439,440,441,442,443,444,445,446,490,491,492,493,494,495,496,497,498,542,543,544,545,546,547,548,549,550,595,596,597,598,599,600,601]
-box1,box2,box3,box4=maze6.index('┌'),maze6.index('┐'),maze6.index('└'),maze6.index('┘')
-#find nextone, find progression dict, find dict
+box1,box2,box3,box4=int(maze6.index('┌')),int(maze6.index('┐')),int(maze6.index('└')),int(maze6.index('┘'))
+cooll=['19dollarfortnitecard','Coder100','HahaYes'] #um i was bored kinda ok i didnt want to make actual stuff so i just made cool coder boi list ok yea ok okokokokkko
+#find nextone
 nextone={-69:emaze17,-68:emaze18,-67:emaze19,-66:emaze20,-65:easterblack,-120:emaze1,-119:emaze2,-118:emaze3,-117:emaze4,-115:emaze5,-114:emaze6,-113:emaze7,-112:emaze8,-110:emaze9,-109:emaze10,-108:emaze11,-107:emaze12,-106:emaze132,-105:emaze13,-104:emaze14,-103:emaze15,-102:emaze16,-100:emaze,-8:theTruth,-3:theroom,0:themine,1:maze1,2:maze2,3:maze3,4:maze4,5:maze5,6:maze6,7:maze7,8:maze8,9:maze9,10:maze10,50:TheOne1,51:TheOne2,52:TheOne3,53:TheOne4,56:TheOne5,57:TheOne6,100:lanc1,101:lanc2,102:lanc3,103:lanc55} #easter things in here
 mcolor='\033[38;5;131m'
 modli=['Module A','Module B','Module C','Module E','Module D']
@@ -3188,7 +3188,9 @@ def dialogue():
         else:
           printt("Well as of now, we are safe. At least until the 6th day.\nThats the only reason I have said "+R+"Him"+mcolor+" more than once.\nSomething seems to have cleared in my mind, as if I can see the end.\nI feel almost.. accomplished, like I did something. Weird.")
         time.sleep(2)
-        anykey()
+        print(R+'[Enter to continue]')
+        getkey1()
+        c()
     else:
       if minimapa==False:
         if 'Old Pick' not in inventory:
@@ -3375,7 +3377,7 @@ def achieve(h='`',h1=True):
   with open("truthdata.json",'r') as k: #make sure you dont override things, with yourself AND others
      achievements2=json.load(k)
   for i in achievements2[name].keys():
-    if achievements2[name][i] in [False,True] and type(achievements2[name][i])==bool:
+    if achievements2[name][i] in [False,True]:
       achievements[i]=True if achievements2[name][i] else achievements[i]
   achievements2[name]=achievements
   with open('truthdata.json','w') as j:
@@ -3422,11 +3424,10 @@ def npctalker(direc):
     if thethinger=='':
       return
     if not any([direc=='left' and ischar('left','⊞'),direc=='right' and ischar('right','⊟'),smallvarget('MYARMS') and '\033[38;5;12m' in thethinger]):
-      printt(thethinger,2)
+      printt(thethinger,1)
     else:
       tinyvars['MYARMS']=True
       printt("MY ARMS MY POOR ARMSSSSSSSSSSSS\n"+ast+'I CANT FEEL THEM I CANTTTTTTTTTTTTTTTTTTTT\n'+ast+'jk lol im just a box chill if you wanna eat the other half go ahead',1)
-    time.sleep(2)
     anykey()
 getoitem=False
 unlockdict={
@@ -3453,7 +3454,7 @@ def itempick(dire,hehe=False,recursion=False):
       if resr in ['y','yes','ye']:
         if len(inventory)<thelimiter or itemdict['Module E']=='Yes' and 'Unspoken Relic' not in inventory:
           getoitem=True
-          if itemdict[liop] not in modli:
+          if itemdict[liop] not in ['Module A','Module B','Module C','Module D','Module E']:
             print("Item added to inventory")
           if itemdict[liop] in unlockdict.keys():
             for i in unlockdict[itemdict[liop]]:
@@ -3463,7 +3464,7 @@ def itempick(dire,hehe=False,recursion=False):
                 craftablelol=True
           inventory.append(itemdict[liop])
           mazeq[liop2]='-'
-          if itemdict[liop] in modli and returnword(mazeq)!='TheOne6':
+          if itemdict[liop] in ['Module A','Module B','Module C','Module D','Module E'] and returnword(mazeq)!='TheOne6':
             printt("You reach for the item....",2)
           if itemdict[liop]=='Module A':
             if not smallvarget("Aa") and returnword(mazeq)!='TheOne6':
@@ -3529,8 +3530,11 @@ def itempick(dire,hehe=False,recursion=False):
           achieve('???')
         mazeq[liop2]='-'
         print("Press 'E' to access your notes.")
-        time.sleep(1)
-        anykey()
+        print('[Enter to continue]')
+        j='w'
+        while j in [UP,DOWN,RIGHT,LEFT,'w','a','s','d']:
+          j=getkey1()
+        c()
       else: #MINER MINIGAME THINGS
         if (len(set_inv())<thelimiter or itemdict['Module E']=='Yes' or mindict[liop][0] in inventory) and inventory.count(mindict[liop][0])<mindict[liop][1]:
           if mindict[liop][0]!='Rock': #for minerals
@@ -3588,13 +3592,13 @@ def truthtime():
   time.sleep(1)
   if 'Bat' in achievements.keys(): #outdated stuff but maybe i keep
     printt(colorsp()+'HEYA KID!!!!!!!!!!')
-    slepy(2)
+    time.sleep(2)
     printt(colorsp()+'WAIT WHY ARE YOU [In existence.]')
-    slepy(1)
+    time.sleep(1)
     printt(colorsp()+"YOU FREED YOURSELF????? [[Almost]] NOW THATS WHAT I LIKE TO SEE.")
-    slepy(1)
+    time.sleep(1)
     printt(colorsp()+"LETS HOPE YOU DONT DIE LIKE ALL THE OTHERS HAAAAAAAAHAHAHA [[Everyone is dead.]]"+R)
-    slepy(4)
+    time.sleep(4)
     c()
   if name!='Muffinlavania':
     printt(redc+'User "'+name+'" not in moderator list.',0.05,False,True)
@@ -3779,7 +3783,6 @@ def yskysn():
     'Q':'\033[38;5;46m','!':'\033[38;5;174m','@':'\033[38;5;181m','#':'\033[38;5;181m','$':'\033[38;5;181m',
     'R':'\033[0m','▢':'\033[38;5;51m▢', #player
     '~':'\033[38;5;62m◌'} #empty space to move in
-  stats4nerds={'turns':0,'speak':0,'magic':0,'heal up':0,'kys':0,'yskysn heals':0,'dream mask':0,'rusty mask':0,'hockey mask':0,'doctors':0,'damage taken':0,'useless turns':0}
   if acheck("LYS"):
     c()
     print("\033[38;5;88mYSKYSN\033[0m recognizes you...\nIt's as if he is expecting something.")
@@ -3792,6 +3795,7 @@ def yskysn():
       print("\n\033[38;5;67m0) .....\n")
     print(f"\n\033[38;5;1m{'1 - Open a window':<40}(x2 boss hp!)\n\033[38;5;93m{'2 - Give him lean':<40}(enables extreme mode!)\n\033[38;5;159m{'3 - Engulf yourself in lightning':<40}(disables heals!)\n\033[38;5;130m{'4 - Give into the hate.':<40}(don't.)\n\033[0m{'5 - Stare back at him':<40}(normal boss)\n\n[All harder modes give a special ending..., x to just exit]")
     dalist = [('0' if g else '1'),('l' if SAVE!=False else '1'),'1','2','3','4','5','x']
+    stats4nerds={'turns':0,'speak':0,'magic':0,'heal up':0,'kys':0,'yskysn heals':0,'dream mask':0,'rusty mask':0,'hockey mask':0,'doctors':0,'damage taken':0,'useless turns':0}
     while (jy:=getkey1()) not in dalist:
       pass
     c()
@@ -3814,12 +3818,12 @@ def yskysn():
       printt(['The lightning feels \033[38;5;88mgreat\033[0m. You feel like giving in at any time...','\033[38;5;124m(Healing has been disabled!)'],[1,.02])
       noheal=True
     elif jy=='4':
-      printt(["...","You feel....."+R+" meaningless.","At any moment, your life can be worth nothing.","\033[38;5;130m[No hit mode enabled (good luck)]"],[2,1,1,.02])
+      printt(["...","You feel....."+r+" meaningless.","At any moment, your life can be worth nothing.","\033[38;5;130m[No hit mode enabled (good luck)]"],[2,1,1,.02])
       yehp=1
       noheal=True
       nonr=True
     else:
-      print(['\033[38;5;88mYSKYSN\033[0m looks back in anger.','\033[38;5;88mA waste of oxygen. I mean that, with 100 percent, a thousand percent.'+R],[1,1])
+      print(['\033[38;5;88mYSKYSN\033[0m looks back in anger.','\033[38;5;88mA waste of oxygen. I mean that, with 100 percent, a thousand percent.'+r],[1,1])
     anykey()
     if nonr:
       coloreddict['n']='\033[48;5;52m '
@@ -4155,10 +4159,10 @@ def yskysn():
         printman('''
 ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\no               Q       YSKYSN HP: '''+' '*(4-len(str(bhp)))+str(bhp)+'''                        o\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo''')
         j=saying[bhp//(100*bmulti)]
-        print("\n"+j[0]+f"{j[1]:^63}"+R+(' (no)' if bhp//(100*bmulti)==9 else ''))
+        print("\n"+j[0]+f"{j[1]:^63}"+r+(' (no)' if bhp//(100*bmulti)==9 else ''))
         print(f"\n{'[A/D/Enter to choose, n = stats, l = leave, game saves!]':^63}")#3 = 2x boss, 16 = LEAN, 12 = No heals, 22 = normal, anything else = no hit
         if hasspidy:
-          print(f'\033[38;5;1m{"[Spidy]":^63}'+R)
+          print(f'\033[38;5;1m{"[Spidy]":^63}'+r)
         coloreddict[noballs[selection]]='\033[38;5;174m'
         print(f"\n\n\033[38;5;79m{'Health - '+str(yehp):^63}")
         printman(buttons,False)
@@ -4166,7 +4170,7 @@ ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\no              
         achieve("s",['3' if bmulti==2 else '16' if xtreme else f'{random.randint(26,30)}' if nonr else '12' if noheal else '22',yehp,bhp,stats4nerds,hasspidy])
         wee=getkey1() #yskysn input
         if wee in [RIGHT,LEFT,'a','d']:
-          coloreddict[noballs[selection]]='\033[38;5;177m'
+          coloreddict[noballs[selection]]='\033[38;5;181m'
         if wee in [LEFT,'a']:
           selection-=1
         elif wee in [RIGHT,'d']:
@@ -4174,7 +4178,7 @@ ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\no              
         elif wee=='n':
           c()
           s4=stats4nerds
-          print(R+'\n----------------\nStats for nerds:\n\n\033[38;5;82m\nHealth: '+str(yehp)+'\nBoss Health: '+str(bhp)+'\nTotal Turns: '+str(s4['turns'])+'\nTotal Speaks: '+str(s4['speak'])+'\nTotal Magics: '+str(s4['magic'])+'\nTotal Heal Ups: '+str(s4['heal up'])+'\nTotal KYS: '+str(s4['kys'])+'\nTotal Dream Masks: '+str(s4['dream mask'])+'\nTotal Hockey Masks: '+str(s4['hockey mask'])+'\nTotal Rusty Masks: '+str(s4['rusty mask'])+'\nTotal Doctor\'s Kits: '+str(s4['doctors'])+'\nTotal YSKYSN Heals: '+str(s4['yskysn heals'])+'\nTotal Damage Taken: '+str(s4['damage taken'])+'\nTotal Useless Turns: '+str(s4['useless turns'])+R+'\n----------------')
+          print(r+'\n----------------\nStats for nerds:\n\n\033[38;5;82m\nHealth: '+str(yehp)+'\nBoss Health: '+str(bhp)+'\nTotal Turns: '+str(s4['turns'])+'\nTotal Speaks: '+str(s4['speak'])+'\nTotal Magics: '+str(s4['magic'])+'\nTotal Heal Ups: '+str(s4['heal up'])+'\nTotal KYS: '+str(s4['kys'])+'\nTotal Dream Masks: '+str(s4['dream mask'])+'\nTotal Hockey Masks: '+str(s4['hockey mask'])+'\nTotal Rusty Masks: '+str(s4['rusty mask'])+'\nTotal Doctor\'s Kits: '+str(s4['doctors'])+'\nTotal YSKYSN Heals: '+str(s4['yskysn heals'])+'\nTotal Damage Taken: '+str(s4['damage taken'])+'\nTotal Useless Turns: '+str(s4['useless turns'])+r+'\n----------------')
           anykey()
           c()
         if wee in [ENTER,'z','l']:
@@ -4567,7 +4571,7 @@ def planet():
       anykey()
   timeSTUP=False
 
-def square(f): #find square, find player maker, give top left 
+def square(f,k=None): #find square, find player maker, give top left 
   global mazeq
   overide()
   mazeq[f]='┌'
@@ -4652,6 +4656,9 @@ def portal():
 lll=False
 TRUEYAYA=False
 mined=False
+true1=True
+true2=True
+true3=True
 def miniiq(tam=True):
   global timeSTUP,mazeq
   timeSTUP=True
@@ -4663,7 +4670,7 @@ def miniiq(tam=True):
     printt("Would you like to play the minigame? \n(You will return here after playing, y for yes, r for the rules of the game)!\n\nMost Recent Score: "+str(miniscore)+"\nHighscore: "+str(hminiscore))
     if not acheck('Poggers'):
       print("(If you get 3k points you get pro achievement)")
-    g=all([equipped(i) for i in modli])
+    g=itemdict['Module A']=='Yes' and itemdict['Module B']=='Yes' and itemdict['Module C']=='Yes' and itemdict['Module D']=='Yes' and itemdict['Module E']=='Yes'
     if g:
       time.sleep(1)
       printt(bold+"(The power of the modules unlocks extreme mode... (e to enable)")
@@ -4773,7 +4780,7 @@ def monke():
     printt2('RAOOOOoaaoAOAOoTTTTeEEEEE iGGMEEEEEE','[dont talk to me nob]',20,.03)
     time.sleep(4)
     c()
-    if not acheck('luci'):
+    if 'luci' not in achievements:
       achieve('luci')
       anykey()
     monkehappy2=True
@@ -4861,7 +4868,11 @@ def crafting():
         c()
         printt(bold+"You may now return to the simulation.",.05,1)
         printt(bold+"Your capsule has been unlocked.",.05,2)
-        achieve('end',9 if 'The Key' in inventory else 8)
+        if 'The Key' in inventory:
+          achievements['end']=9
+        else:
+          achievements['end']=8
+        achieve()
         gretly()
       if alistpo[ru]!='Unspoken Relic':
         for i in iodict.keys():
@@ -4874,7 +4885,6 @@ def crafting():
             craftdict[i][0]=True
       inventory.append(alistpo[ru])
     anykey()
-  c()
 thevoltdict={
   1:[theroom,[317,359,577,837]],
   2:[Shed,[317,421,473,577,861]],
@@ -4892,15 +4902,14 @@ thevoltdict={
 }
 standed=False
 def untrollin():
-  global TheOne1,TheOne2,TheOne3,TheOne4,TheOne5,TheOne6,KeyRoom,mazeq,True1,True2,True3,True4,maze7,nodarks
-  nodarks.extend(i for i in ["maze2","maze7"])
+  global TheOne1,TheOne2,TheOne3,TheOne4,TheOne5,TheOne6,KeyRoom,mazeq,True1,True2,True3,True4,maze7
   for i in [806,807,858,859]:
     maze7[i]='-'
   for i in range(161,265):
     for i2 in [TheOne1,TheOne2,TheOne3,TheOne4]:
       if i2[i] not in ['[',']','-',')','\n','╊']:
         i2[i]='◌'
-  for (i,i2) in zip([TheOne1,TheOne2,TheOne5,TheOne6,KeyRoom,TheOne4,True1,True3,True4,TheOne3],[{'⊡': 163,'⋄': 164,'⎔': 215,'⎚': 216,'▀': 393,'▁': 394,'▂': 445,'▃': 446},{'█': 368,'▉': 369,'▊': 420,'▋': 421,'⊞': 849,'⊟': 850,'⊠': 901,'░': 902},{'▄': 753,'▅': 754,'▆': 805,'▇': 806},{'⊡': 766,'⋄': 767,'⎔': 818,'⎚': 819},{'▀': 683,'▁': 684,'▂': 735,'▃': 736},{'⊞': 450,'⊟': 451,'⊠': 502,'░': 503},{'█': 357,'▉': 358,'▊': 409,'▋': 410},{'▄': 474,'▅': 475,'▆': 526,'▇': 527},{'▀': 69,'▁': 70,'▂': 121,'▃': 122,'⊡': 85,'⋄': 86,'⎔': 137,'⎚': 138,'⊞': 188,'⊟': 189,'⊠': 240,'░': 241,'⊡w': 174,'⋄w': 175,'⎔w': 226,'⎚w': 227,'█': 684,'▉': 685,'▊': 736,'▋': 737,'▄': 456,'▅': 457,'▆': 508,'▇': 509},{'⊡': 389,'⋄': 390,'⎔': 441,'⎚': 442,'▀': 587,'▁': 588,'▂': 639,'▃': 640}]): #FIND DIALOGUE CHARACTERS THING, find dialogue, add spaces here
+  for (i,i2) in zip([TheOne1,TheOne2,TheOne5,TheOne6,KeyRoom,TheOne4,True1,True3,True4],[{'⊡': 163,'⋄': 164,'⎔': 215,'⎚': 216,'▀': 393,'▁': 394,'▂': 445,'▃': 446},{'█': 368,'▉': 369,'▊': 420,'▋': 421,'⊞': 849,'⊟': 850,'⊠': 901,'░': 902},{'▄': 753,'▅': 754,'▆': 805,'▇': 806},{'⊡': 766,'⋄': 767,'⎔': 818,'⎚': 819},{'▀': 683,'▁': 684,'▂': 735,'▃': 736},{'⊞': 450,'⊟': 451,'⊠': 502,'░': 503},{'█': 357,'▉': 358,'▊': 409,'▋': 410},{'▄': 474,'▅': 475,'▆': 526,'▇': 527},{'▀': 69,'▁': 70,'▂': 121,'▃': 122,'⊡': 85,'⋄': 86,'⎔': 137,'⎚': 138,'⊞': 188,'⊟': 189,'⊠': 240,'░': 241,'⊡w': 174,'⋄w': 175,'⎔w': 226,'⎚w': 227,'█': 684,'▉': 685,'▊': 736,'▋': 737,'▄': 456,'▅': 457,'▆': 508,'▇': 509}]):
     for i3 in i2.keys():
       i[i2[i3]]=i3[0]
 def wasit():
@@ -4912,15 +4921,18 @@ def wasit():
     printt("Unspoken, sure. But it exists.",2)
     printt(["It might all be a lie, but its a real lie.","But that does not make it a truth.","This whole place, enclosed in the walls of a small laboratory.","A real life science experiment.",bold+"A fake part of reality, a false part of truth."],[2,2,2,2,2])
     printt("Yet somehow,\033[38;5;160m we stumbled upon it."+R)
-    time.sleep(2)
-    printt(["\nI myself, now part of this falsehood.","A victim of a flaw, a threat to myself.","I try to help them all, I really do. I can't. \033[38;5;195mIt"+R+" has me,\033[38;5;195m he"+R+" had me.","If I could tell you what it was, I would.","A normal leaf, then all of a sudden, I couldn't move.","Condemned to watch myself destroy, to watch \033[38;5;195mIt"+R+'.',"\nBut you... the first and last player. You ended it.","Not erased, nor victim to \033[38;5;195mhim"+R+', alive.',"To say you broke the cycle would be an understatement.","You ended \033[38;5;195mthem"+R+", as nothing truely fake can exist in reality.","A world in a world, gone for good.","At least hopefully...."],[2,2,2,2,2,3,1,2,2,2,1,2])
-    time.sleep(2)
+    time.sleep(3)
+    printt(["\nI myself, now part of this falsehood.","A victim of a flaw, a threat to myself.","I try to help them all, I really do. I can't. \033[38;5;195mIt"+R+" has me,\033[38;5;195m he"+R+" had me.","If I could tell you what it was, I would.","A normal leaf, then all of a sudden, I couldn't move.","Condemned to watch myself destroy, to watch \033[38;5;195mIt"+R+'.',"\nBut you... the first and last player. You ended it.","Not erased, nor victim to \033[38;5;195mhim"+R+', alive.',"To say you broke the cycle would be an understatement.","You ended \033[38;5;195mthem"+R+", as nothing truely fake can exist in reality.","A world in a world, gone for good.","At least hopefully...."],[2,2,2,2,2,3,1,2,2,2,1,4])
     anykey()
-    printt(["Re-entering.... what a feat.","To be real, made fake, turned real, then to return real in a fake world...","It breaks the rules of fantasy.","This fantasy can no longer exist. We are the only parts keeping this place together.","Everyone is freed.... even my old friend Jovs. (And that weird monkey...)","You can even view the island at any time with the press of the button 'H', and shorten time with '.'","Your path is clear, its time for me to figure out mine...."],[2,2,2,2,2,2,2])
+    printt(["Re-entering.... what a feat.","To be real, made fake, turned real, then to return real in a fake world...","It breaks the rules of fantasy.","This fantasy can no longer exist. We are the only parts keeping this place together.","Everyone is freed.... even my old friend Jovs. (And that weird monkey...)","You can even view the island at any time with the press of the button 'H'.","Your path is clear, its time for me to figure out mine...."],[2,2,2,2,2,2,2])
     printt("Have fun.")
     time.sleep(3)
     anykey()
-    achieve('end',7 if "The Key" in inventory else 6)
+    if 'The Key' in inventory:
+      achievements['end']=7
+    else:
+      achievements['end']=6
+    achieve()
     untrollin()
 def thevolts():
   global theroom,Shed,Portal,labm1,labm2,cavem1,maze10,maze8,maze5,maze4,maze3,maze2,maze1
@@ -5086,11 +5098,11 @@ def itsakid():
         haskide=True
       printt("\nWould you like to play "+bold+"tic-tac-toe? (y for yes)"+R)
       dokid=getkey1()
-      c()
       if dokid=='y':
+        c()
         ticing=tictactoe()
       else:
-        return
+        c()
       c()
       if ticing==True:
         if amokid==0:
@@ -5364,35 +5376,24 @@ somethinglo=Mining
 thelist0i=[39,91,92,93,145,154,155,197,198,206,250,251,257,258,303,304,309,356,357,360,361,409,410,412,462,464,515,566,567,619,620,671,722,723,775,776]
 smallysky=False
 def move(dir):#find move find moving (keywords)
-  global timeSTUP,current,nextone,mazeq,istrue,bossnumbu,mazechang,isright,isleft,numbero,lll,Truth,TRUEYAYA,alive,maze1,cavem1,theLake,cavem2,mined,achievements,notedict,Mining2,inventory,OMGRANDOM,STOP,thechanger,monkehappy,over,thelimiter,hasgrut,smallysky,somethinglo,minervar,getoitem,tinyvars
+  global timeSTUP,current,nextone,mazeq,istrue,bossnumbu,mazechang,isright,isleft,numbero,lll,Truth,TRUEYAYA,alive,maze1,cavem1,theLake,cavem2,mined,achievements,notedict,Mining2,true1,true2,true3,inventory,OMGRANDOM,STOP,thechanger,monkehappy,over,thelimiter,hasgrut,smallysky,somethinglo,minervar,getoitem,tinyvars
   #easter (youdid_nt) didthenote easter
   try:
-    #fixing horrible code: all non dir specific things here (,False in ischars prevents errors, needed for down cases) find all dirs, find start move, go all dirs
-    itempick(dir) #removed prevention for hacking since yea idk (Mod B looking easy to hack..)
+    #fixing horrible code: all non dir specific things here (,False in ischars prevents errors, needed for down cases) find all dirs, find start move
+    if dir!='left' or (ischar('left','B')==False or (ischar('left','B') and itemdict['Module C']=='Yes')): #prevents hacking???
+      itempick(dir)
     npctalker(dir)
     if ischar(dir,'7',False) and mazeq==HEAHE:
       spAM()
     elif ischar(dir,['ಠ','◉'],False):
       guy15() #easter
-    elif ischar(dir,'U',False) and dir!="down":#easter
+    elif ischar(dir,'U',False):#easter
       easterbunnycut()
     elif ischar(dir,'/',False):
       slashem()
       temmiecolor['/']='\033[48;5;82m'
     elif ischar(dir,['┺','┢'],False):
       wasit()
-    elif ischar(dir,'@',False) and mazeq==maze8 and dir!='up':
-      if equipped('Diving Gear [Full]'):
-        printt('\nDo you want to enter '+bold+"The Lake"+R+"? (y for yes)")
-        if getkey1()=='y':
-          mazeq=theLake
-          c()
-          slepy(1)
-          printt("While Diving, you find an underwater cave...",2)
-        c()
-      else:
-        printt("You cant go diving without gear on...",2)
-        anykey()
     elif ischar(dir,['╽','┑','┓','┒','╿','╏'],False):
       j={}
       for h in ['╽','┑','┓','┒','╿','╏']:
@@ -5466,6 +5467,18 @@ def move(dir):#find move find moving (keywords)
       elif ischar('left','K'):
         if mazeq==newthing3:
           shrine(False)
+      elif ischar('left','@'):
+        if 'Diving Gear [Full]' in inventory:
+            printt('\nDo you want to enter '+bold+"The Lake"+R+"? (y for yes)")
+            q12=getkey1()
+            if q12.lower() in ['y','yes','ye','sure']:
+              mazeq=theLake
+              c()
+              slepy(1)
+              printt("While Diving, you find an underwater cave...",2)
+              c()
+              printmaze(mazeq)
+            c()
       elif ischar('left','≣'):
         if mazeq==cavem2:
           mazeq=cavem1
@@ -5615,9 +5628,9 @@ def move(dir):#find move find moving (keywords)
           anykey()
       elif ischar('up','e'):
         if mazeq==True1:
-          if not smallvarget("true1"):
+          if true1:
             c()
-            smallvarset("true1")
+            true1=False
             printt("So that's how fresh air feels.")
             time.sleep(2)
             if 'Unspoken Relic' in inventory:
@@ -5631,7 +5644,7 @@ def move(dir):#find move find moving (keywords)
           else:
             mazeq=True2
         elif mazeq==True2:
-          if not smallvarget("true2"):
+          if true2:
             c()
             if 'Unspoken Relic' in inventory:
               printt("You pass those huge green objects...\nIf only you could remember their name.")
@@ -5639,12 +5652,12 @@ def move(dir):#find move find moving (keywords)
               printt("You pass huge green structures."+R+R+R+"\nThey smell better than anything you've ever smelled before.")
             time.sleep(3)
             c()
-            smallvarset("true2")
+            true2=False
             mazeq=True3
           else:
             mazeq=True3
         elif mazeq==True3:
-          if not smallvarget("true3"):
+          if true3:
             c()
             if 'Unspoken Relic' not in inventory:
               printt("Soon you find a campsite, which seems to have been used a long time ago.")
@@ -5652,14 +5665,15 @@ def move(dir):#find move find moving (keywords)
               printt("Soon you reach the campsite. A feeling of deja vu kicks in...")
             time.sleep(3)
             mazeq=True4
-            smallvarset("true3")
+            true3=False
             c()
           else:
             mazeq=True4
         elif mazeq==True4:
-          c()
+          achievements['end']=0
+          achieve()
           if 'Unspoken Relic' not in inventory:
-            achieve('end',0)
+            c()
             printt("You close your eyes and rest.",2)
             printt("It feels as if this is your first time ever sleeping.")
             time.sleep(4)
@@ -5671,26 +5685,21 @@ def move(dir):#find move find moving (keywords)
             printt(bold+'You are free.',.1)
             time.sleep(2)
           else:
-            print("The campsite. The end of the game.\n\nAre you SURE you want to go? (make sure youve explored...)")
-            if getkey1()=='y':
-              achieve('end',0)
-              printt(["You finally reach the campsite.","You remember. You know this is where you have to be.","It's as if they all know you."],[2,2,2])
-              if 'The Key' in inventory:
-                printt(["\n\033[48;5;44mscrew this 4th wall stuff god damn your a gamer.","you literally did the entire game in one run what the actual hell","if your not my friend lucas then like holy hell","i guess you could totally be bumba i would not be surprised","thats some serious comitment.....","i would give you an achievement but this is not being done by any other person in the entire world so im not that evil lol","thank you so much for playing :)\n"+R],[1,1,2,2,1,2])
-                anykey(False)
-                printt("\033[48;5;44moh wait im not done with the dialogue thing back to that lol"+R)
-                anykey(False)
-                clearline(8)
-              time.sleep(2)
-              printt(["It's as if you know them. You know you haven't been here before though....","A weird feeling starts to emerge.... hunger.","After a day of picking berries (not leaves....), your group finally decides to rest.","\nIt feels as if this is your first time sleeping.","At least in a while...","You know where you are in the morning. You couldn't be happier."],[2,2,2,2,3])
-              thelastvar='⎯'*(12+len(name))
-              time.sleep(4)
-              printt("\033[38;5;9m\nWith me at the head, we all left in search of our futures.\nNo longer waking up in that filthy simulation, no longer staring at endless blue pixels.\nA feeling of life, a feeling of pain.\n\033[38;5;1mA feeling of freedom.\n\033[38;5;9mThe end of an dystopian utopia.\nAn endless world awaited us. The sky was no longer the limit.\nWe were truely free. And we knew it.",1)
-              print("\033[0m\n\033[48;5;22m┌"+thelastvar+"┐\n│\033[38;5;9mI, "+name+", was it.\033[0m\033[48;5;22m│\n└"+thelastvar+'┘'+R+'\n')
-              achieve('The Truth.')
-              time.sleep(5)
-              print("[Any key to leave, once and for all. Thank you for playing :)]")
-              anykey()
+            c()
+            printt(["You finally reach the campsite.","You remember. You know this is where you have to be.","It's as if they all know you."],[2,2,2])
+            if 'The Key' in inventory:
+              printt(["\n\033[48;5;44mscrew this 4th wall stuff god damn your a gamer.","you literally did the entire game in one run what the actual hell","if your not my friend lucas then like holy hell","thats some serious commitment.....","i would give you an achievement but this is not being done by any other person in the entire world so im not that evil lol","thank you so much for playing :)"+R],[1,1,2,2,1,2])
+              anykey(False)
+              printt("\033[48;5;44moh wait im not done with the dialogue thing back to that lol"+R)
+              anykey(False)
+              clearline(8)
+            printt(["It's as if you know them. You know you haven't been here before though....","A weird feeling starts to emerge.... hunger.","After a day of picking berries (not leaves....), your group finally decides to rest.","\nIt feels as if this is your first time sleeping.","At least in a while...","You know where you are in the morning. You couldn't be happier."],[2,2,2,1,3])
+            thelastvar='⎯'*(12+len(name))
+            printt("\033[38;5;9m\nWith me at the head, we all left in search of our futures.\nNo longer waking up in that filthy simulation, no longer staring at endless blue pixels.\nA feeling of life, a feeling of pain.\n\033[38;5;1mA feeling of freedom.\n\033[38;5;9mThe end of an dystopian utopia.\nAn endless world awaited us. The sky was no longer the limit.\nWe were, truely, free. And we knew it.",1)
+            print("\033[0m\n\033[48;5;22m┌"+thelastvar+"┐\n│\033[38;5;9mI, "+name+", was it.\033[0m\033[48;5;22m│\n└"+thelastvar+'┘'+R+'\n')
+            achieve('The Truth.')
+            time.sleep(2)
+            slepy(3)
           achieve('Escape?')
           achieve('Escape.')
           alive=False
@@ -5712,19 +5721,17 @@ def move(dir):#find move find moving (keywords)
               c()
               if standed:
                 printt("People are walking around...\nA sense of... happiness fills the air.",2)
-                Music.set_volume(.2)
               mazeq=TheOne1
               current=50
             c()
           elif itemdict['Module D']=='Yes':
             printt([bold+"\nThe Last Key starts to drift off.","It is time to see the truth.","Do you wish to proceed? (y for yes)"+R],[1,2])
-            if craftdict["Unspoken Relic"] and "The Key" not in inventory:
-              print(bold+"\nIf you're on your way to get the relic... maybe something else beforehand too?\n"+r)
             if getkey1()=='y':
               c()
               slepy(2)
               printt(['You walk into the green light.',"You know you won't ever see this island again.",bold+'But it isnt a free ticket out.'],[1,1,3])
-              anykey()
+              print('[Enter to continue]')
+              getkey1()
               truthtime()
             else:
               c()
@@ -5747,15 +5754,17 @@ def move(dir):#find move find moving (keywords)
         else:
           mazeq=labm1
       elif ischar('up','@'):
-        if equipped('Diving Gear [Full]'):
+        timeSTUP=True
+        if 'Diving Gear [Full]' in inventory:
           printt('\nAre you sure you want to leave the underwater cave?\n(You will use the rest of your diving gear!)')
           if getkey1()=='y':
-            mazeq,current=maze8,8
+            mazeq=maze8
+            current=8
             inventory.remove('Diving Gear [Full]')
             inventory.append('Diving Gear [Empty]')
           c()
         else:
-          printt("You cant survive that long underwater without diving gear on...",1)
+          printt("You cant survive that long underwater without diving gear....",1)
           anykey()
       elif ischar('up','≣'):
         mazeq=cavem1
@@ -5836,8 +5845,8 @@ def move(dir):#find move find moving (keywords)
         elif mazeq==newthing3:
           mazeq=HEAHE
         elif mazeq==TheOne6:
-          if not ('The Key' in inventory and smallvarget("hasgrut")):
-            smallvarset("hasgrut")
+          if not ('The Key' in inventory and hasgrut):
+            hasgrut=True
             printt("There is a huge door, and a slot for a key.")
             time.sleep(2)
             if "The Key" in inventory:
@@ -5849,11 +5858,9 @@ def move(dir):#find move find moving (keywords)
           if "The Key" in inventory:
             mazeq=KeyRoom
         elif mazeq==TheOne4:
-          if not smallvarget("exiteD"):
-            printt("You take a step out of this place.")
-            time.sleep(3)
-            c()
-            smallvarset("exiteD")
+          printt("You take a step out of this place.")
+          time.sleep(3)
+          c()
           mazeq=True1
           if 'Unspoken Relic' not in inventory:
             inventory=[]
@@ -5863,7 +5870,18 @@ def move(dir):#find move find moving (keywords)
           mazeq=labm1
         else:
           mazeq=theLake
-      if ischar('right','g'):
+      if ischar('right','@'):
+        if 'Diving Gear [Full]' in inventory:
+            timeSTUP=True
+            printt('\nDo you want to enter '+bold+"The Lake"+R+"? (y for yes)")
+            q12=getkey1()
+            if q12.lower() in ['y','yes','ye','sure']:
+              mazeq=theLake
+              c()
+              slepy(1)
+              printt("While Diving, you find an underwater cave...",2)
+            c()
+      elif ischar('right','g'):
         if mazeq not in [newthing1,newthing2,newthing3]:
           gensz()
         else:
@@ -5914,12 +5932,12 @@ def move(dir):#find move find moving (keywords)
               c()
           else:
             printt("\n\nYou look at the pump, it reads:\n"+bold+"\nOxygen - Intended for Diving Gear\n"+R,0.04,True)
-            printt("(You should find a diving gear, anykey to continue)")
+            printt("(You should find a diving gear, enter to continue)")
             getkey1()
             c()
         else:
           printt("\nThe pump doesnt look like its on...",0.04,True)
-          printt('(There is no power, anykey continue)')
+          printt('(There is no power, enter to continue)')
           getkey1()
           c()
         timeSTUP=False
@@ -6099,7 +6117,23 @@ def move(dir):#find move find moving (keywords)
           planet()
         if ischar('down','◓') or ischar('down','◓') or ischar('down','○'):
           pumpy() #omg halloween
-        if ischar('down','T'):
+        if ischar('down','@'):
+          if 'Diving Gear [Full]' in inventory:
+            timeSTUP=True
+            printt('\nDo you want to enter '+bold+"The Lake"+R+"? (y for yes)")
+            q12=getkey1()
+            if q12.lower() in ['y','yes','ye','sure']:
+              mazeq=theLake
+              c()
+              slepy(1)
+              lll=True
+              printt("While Diving, you find an underwater cave...")
+              slepy(2)
+              c()
+              timeSTUP=False
+              printmaze(mazeq)
+            c()
+        elif ischar('down','T'):
           if mazeq==newthing2:
             mazeq=newthing3
           lll=True
@@ -6135,8 +6169,7 @@ def move(dir):#find move find moving (keywords)
           if mazeq==maze5:
             mazeq=labm1
           elif mazeq==True1:
-            mazeq = TheOne4
-            current = 53
+            pass
           elif mazeq==emaze20: #easter
             c()
             printt(".......")
@@ -6201,10 +6234,9 @@ def move(dir):#find move find moving (keywords)
             thechanger=False
         lll=False
   except Exception as e:
-    print(f"Error! {e} || Type: ({type(e)})")
+    print(f"Error! {e}+({type(e)})")
     time.sleep(1)
   getoitem=False
-  
 
 theeasters=[emaze,emaze1,emaze2,emaze3,emaze4,emaze5,emaze6,emaze7,emaze8,emaze9,emaze10,emaze11,emaze12,emaze13,emaze14,emaze15,emaze16,emaze17,emaze132] #easter
 
@@ -6219,7 +6251,7 @@ temmiecolor={
   'U':"\033[48;5;15m ",
   '^':'\033[48;5;124m ',
   '&':'\033[48;5;147m ',
-  '%':'\033[48;5;82m ',
+  '%':'\033[48;5;77m ',
   '=':'\033[48;5;226m ',
   'r':'\033[48;5;237m ',
   'l':'\033[48;5;226m ',
@@ -6375,7 +6407,7 @@ def printout(i9,Se=False,hue=False):
     elif i9==':':
       printr('\033[48;5;63m ')
     elif i9 in ['-','|'] and thebigfunny==True:
-      printr('\033[48;5;76m ')
+      printr('\033[48;5;82m ')
     elif i9=='|':
       print(" ",end="")
     elif i9 in ['┌','┐','└','┘','A','B','C','D','E'] and thebigfunny==True:
@@ -6717,44 +6749,76 @@ def printout(i9,Se=False,hue=False):
               print(i9,end='')
           else:
             print(i9,end='')
-nodarks=["theLake","theLake2","theroom","theTruth","labm1","labm2","Mining","Portal","True1","True2","True3","True4","lanc1","lanc2","lanc3","lanc4","lanc55","lanc6","Modulea","HEAHE","festivehall","newthing1","newthing2","newthing3","emaze","emaze7","emaze17","emaze18","emaze19","Boss 5","Boss 6","Halloween"] #easter (the emaze)
-
+places=[]
+nodarks=["theLake","theLake2","theroom","theTruth","labm1","labm2","Mining","Portal","True1","True2","True3","True4","lanc1","lanc2","lanc3","lanc4","lanc55","lanc6","Modulea","HEAHE","festivehall","newthing1","newthing2","newthing3","emaze","emaze7","emaze17","emaze18","emaze19","Boss5","Boss6","Halloween"] #easter (the emaze)
 thebigfunny=False
 def printmaze(themaze,k=False):
-  global itemdict,f,startnight1,startnight2,startnight3,thebigfunny,counti
+  global itemdict,f,places,startnight1,startnight2,startnight3,thebigfunny,counti
   themaze2=themaze
   thebigfunny=False
-  RET = returnword(mazeq)
-  if themaze==mazeq:
-    if jing:
-      print('Score:'+str(miniscore)+'\n')
-  if (mazeq not in [cavem1,cavem2,Mining2,Mining3] and night==False and not(mazeq==Shed and facbelike==False) and not any([startnight1,startnight2,startnight3])) or RET in nodarks or RET in Finale or k or (RET in ["Shed","Shed2"] and facbelike) or current<-50:
+  if (mazeq not in [cavem1,cavem2,Mining2,Mining3] and night==False and not(mazeq==Shed and facbelike==False) and not any(i==True for i in [startnight1,startnight2,startnight3])) or returnword(mazeq) in nodarks or returnword(mazeq) in Finale or '╳' in mazeq or k:
     counti=-1
     for i in themaze2:
       printout(i,False,'7' in themaze2)
-  else: #find dark, find nv
-    def PLACED(height,width):
-      p=[]
-      for i in range(-1*height,height+2):
-        i3=52*i
-        p.append([box1-(width+1)+i3+i,box1+width+3+i3-i] if i>0 else [box1-width+i3-i,box1+width+2+i3+i])
-      return p
+  else:
     if mazeq in [cavem1,cavem2,Mining2,Mining3] or night==True or (mazeq==Shed and facbelike==False) or any(i==True for i in [startnight1,startnight2,startnight3]):
       places=[[1,2]]
-      if itemdict['Night Vision']=='Yes' and "lanc" not in RET and "cavem" not in RET and "Mining" not in RET:
+      if itemdict['Night Vision']=='Yes' and "lanc" not in returnword(mazeq):
         thebigfunny=True
-      elif equipped('Flashlight') or equipped('Lantern') or equipped('Night Vision') and not any(i==True for i in [startnight1,startnight2,startnight3]):
-        places=PLACED(2,5)
+      elif itemdict['Flashlight']=='Yes' or itemdict['Lantern']=='Yes' or itemdict['Night Vision']=='Yes' and not any(i==True for i in [startnight1,startnight2,startnight3]):
+        places=[]
+        for i in range(-2,4):
+          loligag=box1
+          i3=52*i
+          if i>0:
+            f=[loligag-5+i3+i,loligag+7+i3-i]
+          else:
+            f=[loligag-5+i3-i,loligag+7+i3+i]
+          places.append(f)
       elif startnight1==True and mazeq not in [cavem1,cavem2,Shed,Mining2,Mining3]:
-        places=PLACED(7,18)
+        places=[]
+        for i in range(-7,9):
+          loligag=box1
+          i3=52*i
+          if i>0:
+            f=[loligag-17+i3+i,loligag+18+i3-i]
+          else:
+            f=[loligag-17+i3-i,loligag+18+i3+i]
+          places.append(f)
       elif startnight2==True and mazeq not in [cavem1,cavem2,Shed,Mining2,Mining3]:
-        places=PLACED(6,14)
+        places=[]
+        for i in range(-6,8):
+          loligag=box1
+          i3=52*i
+          if i>0:
+            f=[loligag-13+i3+i,loligag+14+i3-i]
+          else:
+            f=[loligag-13+i3-i,loligag+14+i3+i]
+          places.append(f)
       elif startnight3==True and mazeq not in [cavem1,cavem2,Shed,Mining2,Mining3]:
-        places=PLACED(5,11)
+        places=[]
+        for i in range(-5,7):
+          loligag=box1
+          i3=52*i
+          if i>0:
+            f=[loligag-10+i3+i,loligag+11+i3-i]
+          else:
+            f=[loligag-10+i3-i,loligag+11+i3+i]
+          places.append(f)
       else:
-        places=PLACED(1,4)
-      for first1,i in enumerate(themaze2):
+        places=[]
+        for i in range(-1,3):
+          loligag=box1
+          i3=52*i
+          if i>0:
+            f=[loligag-5+i3+i,loligag+7+i3-i]
+          else:
+            f=[loligag-4+i3-i,loligag+6+i3+i]
+          places.append(f)
+      first1=-1
+      for i in themaze2:
         t=False
+        first1+=1
         for G in places:
           if first1 in range(G[0],G[1]) or thebigfunny==True:
             printout(i)
@@ -6764,18 +6828,26 @@ def printmaze(themaze,k=False):
         elif i in ['T','\n']:
           printout(i)
         else:
-          counti+=1 #useless? (come here)
+          counti+=1
           print('\033[48;5;0m '+R,end='')
     print(R,end='')
-outsides = ['maze1','maze2','maze3','maze4','maze5','maze6','maze7','maze8','maze9','maze10','themine']
+stuffwhynot=True
+coins=0 #uh totally a secret thing here
+timec=timez[501] #301
+timero=501 #301
 def startnight():
   global startnight1,startnight2,startnight3,screenup
   for i in [0,1,2]:
-    startnight1,startnight2,startnight3 = i==0,i==1,i==2
-    if istime and returnword(mazeq) in outsides:
+    if i==0:
+      startnight1=True
+    elif i==1:
+      startnight2=True
+    else:
+      startnight3=True
+    if istime and mazeq not in nodarks:
       screenup=True
     time.sleep(thetime*20)
-  startnight3=False
+    startnight1,startnight2,startnight3=False,False,False
   screenup=True
 startslep=False
 alive=True
@@ -6794,13 +6866,13 @@ def creepem():
     printt(['Its something... inhuman.',"You know its the end.","But nothing happens.","It seems the power of jesus strikes again."],[2,2,2,2])
   elif 'Unspoken Relic' in inventory:
     printt(random.choice(['A rabbit can be seen running into the bushes.','Just a few leaves passing by.','Must have been the crashing of the waves.',"A presence can be felt behind you."+R*4+"\nBut you know it means no harm. Not anymore.","You can't quite figure out where it came from.\nCould have been the wind, could have been the earth."]),2)
-    printt(['What a peaceful place.',"You go back to sleeping."],[2,.02])
-    time.sleep(3)
+    printt(['What a peaceful place.',"You go back to sleeping."],[1,.02])
+    time.sleep(1)
   elif trflex!=1 or itemdict['Module D']=='Yes':
     printt('Suddenly you feel a presence.',3)
     if itemdict['Module C']=='Yes':
       printt(bold+'The Demon.')
-      time.sleep(2)
+      time.sleep(1)
       printt("Its coming toward you.",3)
       if itemdict['Module D']=='Yes':
         printt(['It doesnt know about Module D.','Look it in the eyes.'+R,'Taking its advice, you turn around and look it straight in the eyes.',"It isnt anything, just a dark cloud of nothingness, void.","It doesnt move.","...","Suddenly its gone, and in its place is a key."+R+"(You found "+bold+"The Key"+R+')'],[2,.08,2,3,2,3,.02],[True,4])
@@ -6842,7 +6914,7 @@ def creepem():
           inventory.append('Revolver[Empty]')
           thenight()
     else:
-      printt(["It doesnt feel human.","You cant turn around."],[2,3])
+      printt(["It doesnt feel human.","You cant turn around."],[2,2])
       if itemdict['Module D']=='Yes':
         printt(["Yet something within you tells you to.","The presence seems to weaken, sensing your sudden confidence.","You turn around, only to find a key.","Must have been your imagination... (You found"+bold+" The Key"+R+")."],[2,2,2,.02])
         inventory.append("The Key")
@@ -6869,7 +6941,6 @@ def creepem():
             mada=False
             thenight()
           else:
-            getkey1()
             achieve('Horrible Game')
             alive=False #le epicly dies
         else:
@@ -6895,18 +6966,13 @@ def creepem():
 #English be like
 thetime=.75
 the_no_times=['Boss 1','Boss 2','Boss 3','Boss 4','Boss 5','Boss 6','Boss 7','Boss 8','Boss 9','Boss 10','TheOne1','TheOne2','TheOne3','TheOne4','TheOne5','TheOne6','KeyRoom','Lesgo','lanc1','lanc2','lanc3','emaze21','emaze22','True1','True2','True3','True4']
-
-timec=timez[501] 
-timero=501 
 def timeing():  #find time
   global timec,timez,timero,night,startslep,mazeq,mazesec,istime,Day,alive,achievements,thetime
   while alive:
     TY.sleep(thetime)
-    if 'Boss' in returnword(mazeq):
-      timero = 201
     if returnword(mazeq) not in the_no_times and istime:
       timero+=1
-    timec=timez[timero] #0 = 1, 60 = 2, etc
+    timec=timez[timero]
     if timero==719:
       timero=0
     if timec=='5:00' and night==False and istime:
@@ -6919,6 +6985,7 @@ def timeing():  #find time
     elif timec=='11:20' and night==True and istime:
       startslep=True
       clearline()
+      print()
       time.sleep(.5)
       printt("\n(You feel drowsy...)",2)
       startslep=False
@@ -6951,7 +7018,7 @@ def timeing():  #find time
         c()
         printt('Day 6',.1)
         time.sleep(3)
-        printt(["That's it.","The island seems to be disappearing.","Yet you are still standing... on nothing.","Suddenly you start to fall..."+R+" You think.","There is nothing, no ground, no sky. You could be falling, you could be dead.","Yet suddenly, an island appears. In front of you is a cave.\nIn the distance there seems to be a plane, and a few metal structures.\nWater surrounds you on all sides.","A completely new experience."],[2,2,2,2,2,2,2])
+        printt(["Thats it.","The island seems to be disappearing.","Yet you are still standing... on nothing.","Suddenly you start to fall..."+R+" You think.","There is nothing, no ground, no sky. You could be falling, you could be dead.","Yet suddenly, an island appears. In front of you is a cave.\nIn the distance there seems to be a plane, and a few metal structures.\nWater surrounds you on all sides.","A completely new experience."],[2,2,2,2,2,2,2])
         time.sleep(2)
         if itemdict["Module C"]=="Yes":
           printt("\nYou're back.",2)
@@ -7004,14 +7071,13 @@ listorandodict={ #find module c hints, find mod c hint, find hints
 
 labisntlike=True
 thingk=''
-def equipped(t):
-  return itemdict[t]=="Yes"
 def equip(e):
   global inventory,goods
   print(set_inv()[e].title()+' equipped')
   itemdict[set_inv()[e]]='Yes'
   if set_inv()[e]=='Module B':
-    goods.extend(['Q','G'])
+    goods.append('Q')
+    goods.append('G')
   if set_inv()[e] in modli and mazeq not in [TheOne1,TheOne2,TheOne3,TheOne4,TheOne5,TheOne6]:
     if set_inv()[e]=='Module C' and mazeq!=TheOne6:
       goods.append('2')
@@ -7086,7 +7152,8 @@ def achieveprint(wewew=False):  #find achievements print, find achieves
     h=[achieve1,achieve2,achieve3,achieve4,achieve5true if succe and "The Truth." in achievements.keys() else achieve5 if succe else achieve5alt]
     h2=[achieve5_1,achieve5_2,achieve5_3,achieve5_4]
     while u not in [ENTER,'x']:
-      print("Press left/right to go through the pages, enter/x to exit\n(Green = gotten, Red = Not)\n"+bold+("(Up/down to go through the events)\n" if n==pagesnumber else '\n')+R+(h[n] if n!=pagesnumber else h2[n2])+'\nPage '+str(n+1)+'/'+str(pagesnumber+(1 if n==pagesnumber else 0)))
+      print("Press left/right to go through the pages, enter/x to exit\n(Green = gotten, Red = Not)")
+      print(bold+("(Up/down to go through the events)\n" if n==pagesnumber else '\n')+R+(h[n] if n!=pagesnumber else h2[n2])+'\nPage '+str(n+1)+'/'+str(pagesnumber+(1 if n==pagesnumber else 0)))
       if n==pagesnumber:
         print(bold+'\nEvent '+str(n2+1)+'/'+str(len(h2))+R)
       u=getkey1()
@@ -7100,12 +7167,18 @@ if 'SEEN_UPDATE' not in achievements:
   time.sleep(10)
   clearline()
   anykey()
+if name in cooll:
+  if name=='HahaYes':
+    print('BRO NO WAY ITS THE REAL HAHA YES NO SHoTTTT')
+  elif name=='Coder100':
+    print("imagine being the most famous cookie on repl smh")
+  else:
+    print("welcome sir lankalot") #old stuff
 while True: #find start (bro ctrl f is a life saver)
   numbi2=0
-  achieve('thisachievementispissingmeoff')
-  thew=acheck('thisachievementispissingmeoff') #christmas achievement
+  thew=('thisachievementispissingmeoff' in achievements.keys()) #christmas achievement, if you wanna get it go to the christmas version in my repls lol
   printt(somerandom(thew)+"Welcome to the Truth!")
-  print(R+"---------------------------------------\n"+somerandom(thew)+"To skip the introduction, press 's'.\n"+somerandom(thew)+"To see the controls, press 'c'.\n"+somerandom(thew)+"To see your achievements, press 'a'"+somerandom(thew)+"\nTo view update logs, 'u', small overview of the game, 'o'\n"+R+"\n(Everything else will lead to the intro)\n"+R+"---------------------------------------")
+  print(somerandom(thew)+"To skip the introduction, press 's'.\n"+somerandom(thew)+"To see the controls, press 'c'.\n"+somerandom(thew)+"To see your achievements, press 'a'"+somerandom(thew)+" (Everything else will lead to the intro)\n"+R)
   if 'lanc2' in achievements.keys():
     print(somerandom(thew)+"[ingame] Press K to try the yskysn boss fight!"+R)
   if acheck('New game pog'):
@@ -7119,14 +7192,18 @@ while True: #find start (bro ctrl f is a life saver)
   if 'thisachievementispissingmeoff' in achievements.keys():
     if 'Bat' in achievements.keys():
       print((random.choice(['\033[38;5;65m','\033[38;5;64m'])+"christmas event is cooler") if 'Bat' in achievements.keys() else (bold+"A little festivity never hurt :)")+R)
-  if 'The Impossible' in achievements.keys():
-    print("\033[48;5;168mYou should love yourself, now!!!!!!!! (you're too good for this game..)"+R)
+    if 'The Impossible' in achievements.keys():
+      print("\033[48;5;168mYou should love yourself, now!!!!!!!! (you're too good for this game..)"+R)
   gr1=getkey1()
   c()
   if gr1=='c':
-    print(bold+"Controls:\n\n"+R+"WASD / Arrow Keys to move\nTAB for inventory\n\tEquip items in inventory to use them\n\tCrafting also is in inventory (or just press 4!!)\nN to take notes, basically writing stuff down\nC to redraw the screen (If anything weird happens)\nY/N for yes and no (when prompted)\nV to view achievements in game\nZ to end the game, if you want to speedrun or something\nX to skip waiting times on  dialogue/text (Spam/hold it to skip a lot) \nF might come into play later.."+("K to get to the \033[38;5;88mYSKYSN\033[0m boss fight!" if 'lanc2' in achievements else ""))
+    print(bold+"Controls:\n"+R)
+    print("WASD / Arrow Keys to move\nTAB for inventory\n\tEquip items in inventory to use them\n\tCrafting also is in inventory\nN to take notes, basically writing stuff down\nC to redraw the screen (If anything weird happens)\nY/N for yes and no (when prompted)\nV to view achievements in game\nZ to end the game, if you want to speedrun or something\nX to skip waiting times on  dialogue/text (Spam/hold it to skip a lot) \nF might come into play later..")
+    if 'lanc2' in achievements.keys():
+      print("K to get to the \033[38;5;88mYSKYSN\033[0m boss fight!")
     slepy(2)
     anykey()
+    c()
     sawdacontrols=True
   elif gr1=='u': #find update logs
     c()
@@ -7137,7 +7214,10 @@ while True: #find start (bro ctrl f is a life saver)
       print(logs[loe])
       print('Left/Right to switch between logs, x to exit\nUpdate Log '+str(loe+1)+'/'+str(len(logs)))
       heha=getkey1()
-      loe += 1 if heha in ['d',RIGHT] and loe!=(len(logs)-1) else -1 if heha in ['a',LEFT] and loe!=0 else 0
+      if heha in ['a',LEFT] and loe!=0:
+        loe-=1
+      elif heha in ['d',RIGHT] and loe!=(len(logs)-1):
+        loe+=1
       c()
   elif gr1=='o':
     c()
@@ -7184,19 +7264,19 @@ for i in achievements.values():
     hasplayedlol=True
 if not hasplayedlol and not sawdacontrols:
   print(bold+"Seems to me like you are new.... so here are the controls\n\n"+R)
-  print("WASD / Arrow Keys to move\nTAB for inventory\n\tEquip items in inventory to use them\n\tCrafting also is in inventory (or just press 4!!)\nC to redraw the screen (If anything weird happens)\nY/N for yes and no (when prompted)\nV to view achievements in game\nZ to end the game, if you want to speedrun or something\nX to skip waiting times on  dialogue/text (Spam/hold it to skip a lot) \nF might come into play later..")
+  print("WASD / Arrow Keys to move\nTAB for inventory\n\tEquip items in inventory to use them\n\tCrafting also is in inventory\nC to redraw the screen (If anything weird happens)\nY/N for yes and no (when prompted)\nV to view achievements in game\nZ to end the game, if you want to speedrun or something\nX to skip waiting times on  dialogue/text (Spam/hold it to skip a lot) \nF might come into play later..")
   slepy(3)
   anykey()
   c()
 try:
   if achievements['end']>0:
     c()
-    print("It seems like you got disconnected during The Truth ending!\n")
+    print("It seems like you got disconnected during The Truth ending!")
     if achievements['end'] in [2,9,7]:
-      print("\n(And yes you will still have The Key)\n")
+      print("(And yes you will still have your The Key)")
     if achievements['end'] in [9,8,7,6]:
-      print("\n\033[38;5;10m(We still haven't forgotten you "+name+".)\033[0m\n")
-    print("Would you like to return to the ending lab? (THIS IS A ONE TIME USE, SAYING NO WILL STILL KEEP THIS SAVE!)\ny for yes, anything else for no")
+      print("(We still haven't forgotten you "+name+".)")
+    print("Would you like to return to the ending lab? (THIS IS A ONE TIME USE!)\ny for yes, anything else for no")
     time.sleep(.5)
     thetrup=getkey1()
     if thetrup=='y':
@@ -7204,7 +7284,6 @@ try:
       print('Exiting simulation.... Exit code: no_losing_hard_ending_for_you_yaya')
       time.sleep(2)
       mazeq=TheOne1
-      current = 50
       if achievements['end'] in [9,2]:
         inventory.append('The Key')
       if achievements['end'] in [9,8]:
@@ -7214,7 +7293,8 @@ try:
         standed=True
         untrollin()
         inventory.append('Unspoken Relic')
-      achieve('end',0)
+      achievements['end']=0
+      achieve()
 except:
   pass
 def tbhidk2():
@@ -7265,19 +7345,13 @@ while alive:
   if not gettingkey:
     printmaze(mazeq,True if current in range(150,250) else False)
   if returnword(mazeq) not in Bosses and returnword(mazeq) not in Finale and '⊚' not in mazeq:
-    print(f'{"Day "+str(Day):^52}',end='')
-  
+    print('    '*6+'Day '+str(Day),end='')
   if not startslep:
-    #MUSIC
     if mazeq in [theTruth,theroom]:
       if mazeq==theTruth:
-        if 'Unspoken Relic' in inventory:
-          Music.set_volume(.5)
         music("Truth",'Truth/Truth.mp3')
     elif all_music!={}:
-      if 'Unspoken Relic' not in inventory:
-        musicstop()
-    
+      musicstop()
     istime=True
     while afk: #find main input, find input, find main getkey
       TY.sleep(.05)
@@ -7286,12 +7360,13 @@ while alive:
           print("\033[H",end="")
           printmaze(mazeq,True if current in range(150,250) else False)
           screenup=False
-    
     keyz = keyz.lower() #correction for caps lock
-    
     try:
-      if all([i in mazeq for i in ['┌','┐','└','┘']]):
-        square(mazeq.index('┌'))
+      if mazeq.index('┐')-mazeq.index('┌')>1:
+        overide('┐')
+        overide('┘')
+        mazeq[mazeq.index('┌')+1]='┐'
+        mazeq[mazeq.index('└')+1]='┘'
     except:
       pass
     if not ('┌' in mazeq and '┐' in mazeq and '└' in mazeq and '┘' in mazeq or '◘' in mazeq):
@@ -7321,6 +7396,8 @@ while alive:
       
       if keyz=='w' or keyz==UP:
         move('up')
+      if keyz=='':
+        pass
       if keyz=='/' and name=='Muffinlavania':
         print("1) Gens\n2) Achievements")
         if getkey1()=='1':
@@ -7361,7 +7438,7 @@ while alive:
       if keyz=='u': #save button, mostly useless tho
         achieve()
       if keyz=='r':
-        print(bold+"Controls:\n\n"+R+"WASD / Arrow Keys to move\nTAB for inventory\n\tEquip items in inventory to use them\n\tCrafting also is in inventory (or just press 4!!)\nC to redraw the screen (If anything weird happens)\n\033[38;5;46m[NEW]\033[0m N to takes notes\nV to view achievements in game\nZ to end the game, if you want to speedrun or something\nX to skip waiting times on  dialogue/text (Spam/hold it to skip a lot) \nF to use a certain item..\n")
+        print(bold+"Keybinds:\n\n"+R+"WASD / Arrow Keys to move\nTAB for inventory\n\tEquip items in inventory to use them\n\tCrafting also is in inventory\nC to redraw the screen (If anything weird happens)\n\033[38;5;46m[NEW]\033[0m N to takes notes\nV to view achievements in game\nZ to end the game, if you want to speedrun or something\nX to skip waiting times on  dialogue/text (Spam/hold it to skip a lot) \nF to use a certain item..\n")
         if 'lanc2' in achievements.keys():
           print("\'K\' - teleport to the yskysn boss fight!"+R)
         if acheck('New game pog'):
@@ -7470,10 +7547,8 @@ while alive:
             STOP=True
             yy=THREAD(target=tbhidk2)
             yy.start()
-      if keyz=='4': #craft
-        crafting()
       if keyz==TAB and mazeq!=Lesgo: #find inventory
-        clearline()
+        clearline(2)
         print("Inventory: (Max: "+("∞" if itemdict['Module E']=='Yes' else str(thelimiter))+")"+bold+(' '*(26-len(name)))+'┌'+('─'*(len(name)+2))+'┐')
         theywe=0
         letsago=random.choice(['\033[48;5;4m','\033[48;5;5m','\033[48;5;6m','\033[48;5;13m']) if acheck("The Banner") else ''
@@ -7547,7 +7622,8 @@ while alive:
                 equip(int(mewantpls)-1)
               else:
                 print('This item is already equipped!')
-              anykey()
+              print('[Enter to continue]')
+              getkey1()
           c()
         if thuyg=='2':
           print("Which item would you like to drop? (Say number of item)"+bold)
@@ -7562,10 +7638,7 @@ while alive:
           clearline(3+len(set_inv()))
           if LOLLL.isdigit():
             if int(LOLLL) < len(set_inv())+1 and len(set_inv())>0:
-              try:
-                dropitem(int(LOLLL)-1)
-              except Exception as fe:
-                print(f"Error... {fe}")
+              dropitem(int(LOLLL)-1)
         if thuyg=='3':
           print("\nWhich item would you like to unequip? (Say number of item)"+bold)
           i2=0
@@ -7583,8 +7656,10 @@ while alive:
                 print('Item unequipped.')
               else:
                 print('This item is not equipped (Or cant be unequipped)')
-              anykey()
+              print('[Enter to continue]')
+              getkey1()
         if thuyg=='4':
+          c()
           crafting()
         if all([thuyg=='5','valentine' in achievements.keys(),not eaten_it]):
           c()
@@ -7603,20 +7678,6 @@ while alive:
         move('down')
       if keyz=='d' or keyz==RIGHT:
         move("right")
-      if keyz=='g' and name=="Muffinlavania":
-        t=''
-        print("What would you like to eval? (enter to eval, tab to exit)\n")
-        while (e:=getkey1()) not in ['tab','enter']:
-          t+=e if len(e)==1 else ''
-          clearline()
-          print(t)
-        if e=='enter':
-          try:
-            eval(t)
-            print("Executed!")
-          except Exception as q:
-            print(f"Error... {q}")
-        anykey()
       if keyz=='0':
         h=''
         if name in devz:
@@ -7638,14 +7699,15 @@ while alive:
             if h!='0':
               inventory.append(item4dev[int(h)-1])
             else:
-              inventory.extend(modli[:-1])
+              for i in modli[:-1]:
+                inventory.append(i)
             if name!='Muffinlavania':
               gGg=False
               print("[Achievements have been disabled!]")
           except:
             pass
           c()
-      if keyz=='.' and (name in devz or "Unspoken Relic" in inventory):
+      if keyz=='.' and name in devz:
         if thetime>.05:
           thetime=round(thetime-.01,3)
           print("Current time (Seconds irl per minute ingame): "+str(thetime))
@@ -7722,7 +7784,7 @@ if FoR==True:
   quit(str(TIPO2)+" seconds passed before you ended your game")
 elif raftper or TRUEYAYA or PLANED or mined or literallyvented or eastering or theairfr: #eastering/theairfr easter
   time.sleep(1 if TRUEYAYA else 0)
-  quit('It took you '+str(TIPO2)+" seconds\n"+("Raft Ending" if raftper else "The Absolute Truth. You are cool ffrfrffrfrfrfrfrfrfrff!!!!!!!!!!!" if TRUEYAYA and "Unspoken Relic" in inventory else "The Truth" if TRUEYAYA else "The Plane Ending" if PLANED else "The Lab Ending" if mined else "The Cart Ending" if literallyvented else "\033[38;5;4mThe Temple Ending" if eastering else "\n\033[38;5;4mThe Air Fryer"))
+  quit('It took you '+str(TIPO2)+" seconds\n"+("Raft Ending" if raftper else "The Truth" if TRUEYAYA else "The Plane Ending" if PLANED else "The Lab Ending" if mined else "The Cart Ending" if literallyvented else "\033[38;5;4mThe Temple Ending" if eastering else "\n\033[38;5;4mThe Air Fryer"))
 elif smallvarget("youdid_nt"): #easter
   quit('.......')
 elif smallvarget("didnt_listen"):#easter
@@ -7731,7 +7793,7 @@ elif smallvarget("didnt_listen"):#easter
 elif Day==6:
   quit(":)")
 elif '╳' not in mazeq:
-  quit('You died to him.')
+  print('You died of a bug or something im sorry f')
 else: #erase
   time.sleep(13)
   sys.exit('Return.')
