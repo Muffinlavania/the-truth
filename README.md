@@ -6,7 +6,7 @@
 
 Has:
 - 5 different endings
-- Not a single use of pygame even though this would probably be sick in it
+- Not a single use of pygame/gui even though this would probably be sick in it
 - A kinda huge map, with darkness and stuff
 - NPCS, Inventory, Crafting, Items, Achievements, Boss????, Secret Boss???, etcetececet 
 - An easter event (yes i added events, theres definitely not reminants of other ones in there...)
