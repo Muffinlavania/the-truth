@@ -14,7 +14,7 @@ Has:
 
 This is mainly so I remember it exists, the code for Windows/Mac/Other stuff is here, as well as the already made exe for windows (idk how to make it for other OS)
 
-# FOR NON WINDOWS PEOPLE (or if you want to compile it yourself)
+# MAC/LINUX (or if you want to compile it yourself)
 ## You will need to: 
 - Get [Python/pip](https://www.python.org/downloads/) (pip3 for mac/linux/whatever)
 - run `pip/pip3 install pyinstaller` in your console/terminal
